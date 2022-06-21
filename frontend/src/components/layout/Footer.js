@@ -15,14 +15,16 @@ const Footer = () => {
   );
 };
 
+// styles
 const FooterEl = styled.footer`
-  background-color: #282c34;
+  background-color: white;
+  border-top: solid 1px gold;
   min-height: 6vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: saddlebrown;
   font-size: calc(8px + 2vmin);
 
   position: fixed;
@@ -30,7 +32,6 @@ const FooterEl = styled.footer`
   left: 0;
   right: 0;
 `;
-
 const Btn = styled.div`
   cursor: pointer;
 `;
