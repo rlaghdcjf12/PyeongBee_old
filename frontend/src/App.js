@@ -52,6 +52,7 @@ function App() {
 }
 
 const AppBase = styled.div`
+  font-family: product-sans, sans-serif;
   text-align: center;
   min-height: 100vh;
   background-color: white;
