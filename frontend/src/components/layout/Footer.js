@@ -1,17 +1,22 @@
 import styled from 'styled-components';
 
-const Footer = () => {
+const Footer = (props) => {
+  const { currentService } = props;
+
   return (
-    <FooterEl>
-      <nav className='container'>
-        <div className='row'>
-          <Btn className='col-3'>M1</Btn>
-          <Btn className='col-3'>M2</Btn>
-          <Btn className='col-3'>M3</Btn>
-          <Btn className='col-3'>M4</Btn>
-        </div>
-      </nav>
-    </FooterEl>
+    <>
+      <EmptyArea />
+      <FooterEl>
+        <nav className='container'>
+          <div className='row'>
+            <Btn className='col-3'>{currentService?.footerMenu[0].title}</Btn>
+            <Btn className='col-3'>{currentService?.footerMenu[1].title}</Btn>
+            <Btn className='col-3'>{currentService?.footerMenu[2].title}</Btn>
+            <Btn className='col-3'>{currentService?.footerMenu[3].title}</Btn>
+          </div>
+        </nav>
+      </FooterEl>
+    </>
   );
 };
 
@@ -19,7 +24,7 @@ const Footer = () => {
 const FooterEl = styled.footer`
   background-color: white;
   border-top: solid 1px gold;
-  min-height: 6vh;
+  height: 6vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,6 +39,9 @@ const FooterEl = styled.footer`
 `;
 const Btn = styled.div`
   cursor: pointer;
+`;
+const EmptyArea = styled.div`
+  height: 7vh;
 `;
 
 export default Footer;
