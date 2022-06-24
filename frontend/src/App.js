@@ -27,8 +27,8 @@ function App() {
     {
       id: 3,
       title: 'US',
-      url: '/us',
-      footerMenu: [{ title: '꽃밭' }, { title: 'M2' }, { title: 'M3' }, { title: '톡' }],
+      url: '/us/hive',
+      footerMenu: [{ title: '하이브' }, { title: 'M2' }, { title: 'M3' }, { title: '톡' }],
     },
   ];
 
@@ -51,13 +51,13 @@ function App() {
     setCurrentService(serviceList[service.id - 1]);
     switch (service.id) {
       case 1:
-        navigate('/me');
+        navigate(serviceList[0].url);
         break;
       case 2:
-        navigate('/you');
+        navigate(serviceList[1].url);
         break;
       case 3:
-        navigate('/us');
+        navigate(serviceList[2].url);
         break;
       default:
     }
