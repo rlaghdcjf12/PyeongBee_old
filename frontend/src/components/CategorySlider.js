@@ -55,11 +55,12 @@ const Slider = styled.div`
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
-  padding-left: max(calc(50% - 400px), 5%);
+  /* padding-left: max(calc(50% - 400px), 5%); */
+  padding-left: 5%;
 `;
 const SlideItem = styled.div`
   flex-shrink: 0;
-  width: 23%;
+  width: 26%;
   max-width: 200px;
 `;
 const Text = styled.p`

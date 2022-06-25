@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import CategoryBlock from '../../components/blocks/categoryBlock/CategoryBlock.js';
+import ListBlock from '../../components/blocks/listBlock/ListBlock.js';
 
 const UsMain = () => {
   const selfCareCategoryList = [
@@ -92,6 +93,13 @@ const UsMain = () => {
     },
     {
       id: 6,
+      title: '반려동물',
+      url: './category/pet',
+      imagePath:
+        'https://media.istockphoto.com/vectors/yellow-honey-hive-with-cute-bees-hanging-on-a-tree-branch-vector-vector-id1248883563?s=612x612',
+    },
+    {
+      id: 7,
       title: '친목',
       url: './category/social',
       imagePath:
@@ -112,11 +120,18 @@ const UsMain = () => {
             draggable='false'
             src='https://media.istockphoto.com/vectors/yellow-honey-hive-with-cute-bees-hanging-on-a-tree-branch-vector-vector-id1248883563?s=612x612'
             alt='bee hive'
-          ></img>
+          />
         </TopImageArea>
       </TopBlock>
       <CategoryBlock title='나를 가꾸는 하이브' categoryList={selfCareCategoryList} />
       <CategoryBlock title='현재를 즐기는 하이브' categoryList={happyCategoryList} />
+      <div>필터</div>
+      <ListBlock />
+      {/* <div>인기 하이브</div>
+      <div>마니또가 있는 하이브</div>
+      <div>참여했던 하이브</div>
+      <div>활기찬 하이브</div>
+      <div>집에서 참여하는 하이브</div> */}
     </div>
   );
 };
@@ -124,8 +139,8 @@ const UsMain = () => {
 // styles
 const TopBlock = styled.div`
   display: flex;
-  width: 80%;
-  max-width: 720px;
+  width: 90%;
+  max-width: 800px;
   max-height: 300px;
   margin: 0 auto;
   background-color: lightyellow;

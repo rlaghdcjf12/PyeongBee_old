@@ -16,19 +16,19 @@ function App() {
       id: 1,
       title: 'ME',
       url: '/me',
-      footerMenu: [{ title: 'M1' }, { title: 'M2' }, { title: 'M3' }, { title: 'M4' }],
+      footerMenu: [{ title: '자아' }, { title: '꿈' }, { title: '추억' }, { title: '분석' }],
     },
     {
       id: 2,
       title: 'YOU',
       url: '/you',
-      footerMenu: [{ title: '마니또' }, { title: 'M2' }, { title: 'M3' }, { title: '친구들' }],
+      footerMenu: [{ title: '마니또' }, { title: 'M2' }, { title: 'M3' }, { title: '친구' }],
     },
     {
       id: 3,
       title: 'US',
       url: '/us/hive',
-      footerMenu: [{ title: '하이브' }, { title: 'M2' }, { title: 'M3' }, { title: '톡' }],
+      footerMenu: [{ title: '하이브' }, { title: '내 하이브' }, { title: '비네스북' }, { title: '버즈' }],
     },
   ];
 
@@ -68,7 +68,7 @@ function App() {
       <Header serviceList={serviceList} currentService={currentService} changeService={changeService} />
       <Body>
         <Routes>
-          <Route path='/' element={<UsMain />}></Route>
+          <Route path='/' element={<MeMain />}></Route>
           <Route path={serviceList[0].url} element={<MeMain />}></Route>
           <Route path={serviceList[1].url} element={<YouMain />}></Route>
           <Route path={serviceList[2].url} element={<UsMain />}></Route>
