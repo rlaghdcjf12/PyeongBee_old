@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Hexagon from '../../common/Hexagon.js';
 // import CategoryTitleArea from './CategoryTitleArea.js';
 // import CategoryItemArea from './CategoryItemArea.js';
 
@@ -13,6 +14,13 @@ const ListBlock = (props) => {
       <ListArea>
         <ItemArea>
           <ImageArea>
+            <Hexagon
+              width='200px'
+              height='200px'
+              isRegular={false}
+              border='solid 3px gold'
+              image='https://media.istockphoto.com/vectors/yellow-honey-hive-with-cute-bees-hanging-on-a-tree-branch-vector-vector-id1248883563?s=612x612'
+            ></Hexagon>
             <img
               width={'100%'}
               src='https://media.istockphoto.com/vectors/yellow-honey-hive-with-cute-bees-hanging-on-a-tree-branch-vector-vector-id1248883563?s=612x612'
