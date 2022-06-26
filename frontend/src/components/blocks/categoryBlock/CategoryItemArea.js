@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import CategorySlider from '../../CategorySlider.js';
+import CategorySlider from './CategorySlider.js';
 
 const CategoryItemArea = (props) => {
   const { categoryList } = props;
