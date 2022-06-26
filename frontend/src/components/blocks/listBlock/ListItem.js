@@ -27,6 +27,9 @@ const ListItem = (props) => {
           <ConditionBadge pill bg='primary'>
             남다른 각오
           </ConditionBadge>
+          <ConditionBadge pill bg='success'>
+            발산역
+          </ConditionBadge>
           <ConditionBadge pill bg='secondary'>
             100% 환급
           </ConditionBadge>
@@ -40,7 +43,13 @@ const ListItem = (props) => {
         <InfoAir>
           <Col md='2'>분위기 :</Col>
           <Col md='10'>
-            <ProgressBar now={60} style={{ height: '3vmin', margin: '5px 0 5px' }} />
+            <ProgressBar
+              variant='warning'
+              now={60}
+              animated
+              label={<span style={{ fontSize: 'calc(1px + 2vmin)', color: 'saddleBrown' }}>보통</span>}
+              style={{ height: '3vmin', margin: '5px 0 5px' }}
+            />
           </Col>
         </InfoAir>
         <InfoPersonnel>
@@ -56,8 +65,8 @@ const ItemArea = styled.div`
   display: flex;
   width: 100%;
   max-height: 240px;
-  background-color: lightyellow;
-  margin-bottom: 10px;
+  /* background-color: lightyellow; */
+  padding: 10px 0 10px;
 `;
 const ImageArea = styled.div`
   width: 20%;

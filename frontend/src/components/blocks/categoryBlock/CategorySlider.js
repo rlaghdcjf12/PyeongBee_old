@@ -1,7 +1,10 @@
-import styled from 'styled-components';
 import { useRef, useState } from 'react';
-import _ from 'lodash';
 import { Image } from 'react-bootstrap';
+import styled from 'styled-components';
+import Hexagon from '../../common/Hexagon.js';
+import _ from 'lodash';
+
+// TODO : 모바일 웹 터치 동작 구현할 것.
 
 const CategorySlider = (props) => {
   const { categoryList } = props;
@@ -40,8 +43,8 @@ const CategorySlider = (props) => {
     >
       {categoryList?.map((category, idx) => {
         return (
-          <SlideItem key={idx}>
-            <Image draggable={false} width='100%' roundedCircle='true' src={category.imagePath}></Image>
+          <SlideItem key={idx} style={{ marginRight: '1.5vmin' }}>
+            <Hexagon image={category.imagePath} border='solid 1px gold' />
             <Text>{category.title}</Text>
           </SlideItem>
         );
@@ -63,7 +66,8 @@ const SlideItem = styled.div`
   width: 26%;
   max-width: 200px;
 `;
-const Text = styled.p`
+const Text = styled.span`
+  font-size: calc(4px + 2vmin);
   text-align: center;
 `;
 
