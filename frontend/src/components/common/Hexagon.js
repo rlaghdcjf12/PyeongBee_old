@@ -1,17 +1,13 @@
-import { forwardRef } from 'react';
 import styled from 'styled-components';
 
-const Hexagon = forwardRef((props, ref) => {
-  const width = ref.width;
-  const height = ref.height;
+const Hexagon = (props) => {
+  const width = props.width;
+  const height = props.height;
   const { image, isRegular = false, border = false } = props;
   const newHeight = isRegular ? (Number(width?.replace('px', '')) / 2) * 1.73 + 'px' : height;
 
-  // console.log(width, height);
-
   if (border) {
     const borderSpec = border?.split(' ');
-    console.log(borderSpec);
     // const borderType = borderSpec[0];
     const borderWeight = borderSpec[1];
     const borderColor = borderSpec[2];
@@ -49,17 +45,16 @@ const Hexagon = forwardRef((props, ref) => {
       </Hexa>
     );
   }
-});
+};
 
 const Border = styled.div`
-  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
-  margin: 10px auto;
+  /* clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); // 세로 정육각형 */
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); // 가로 정육각형
 `;
 
 const Hexa = styled.div`
   /* clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); // 세로 정육각형 */
   clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%); // 가로 정육각형
-  margin: 0 auto; ;
 `;
 
 export default Hexagon;

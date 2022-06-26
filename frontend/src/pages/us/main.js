@@ -126,12 +126,11 @@ const UsMain = () => {
       <CategoryBlock title='나를 가꾸는 하이브' categoryList={selfCareCategoryList} />
       <CategoryBlock title='현재를 즐기는 하이브' categoryList={happyCategoryList} />
       <div>필터</div>
-      <ListBlock />
-      {/* <div>인기 하이브</div>
-      <div>마니또가 있는 하이브</div>
-      <div>참여했던 하이브</div>
-      <div>활기찬 하이브</div>
-      <div>집에서 참여하는 하이브</div> */}
+      <ListBlock title='모든 하이브' />
+      <ListBlock title='인기 하이브' />
+      <ListBlock title='참여했던 하이브' />
+      <ListBlock title='활기찬 하이브' />
+      <ListBlock title='집에서 참여하는 하이브' />
     </div>
   );
 };
