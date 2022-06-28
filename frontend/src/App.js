@@ -8,6 +8,7 @@ import Header from './components/layout/Header.js';
 import MeMain from './pages/me/main.js';
 import YouMain from './pages/you/main.js';
 import UsMain from './pages/us/main.js';
+import HiveDetail from './pages/us/hiveDetail';
 
 function App() {
   const navigate = useNavigate();
@@ -15,35 +16,36 @@ function App() {
     {
       id: 1,
       title: 'ME',
+      baseUrl: '/me',
       url: '/me',
       footerMenu: [{ title: '자아' }, { title: '꿈' }, { title: '추억' }, { title: '분석' }],
     },
     {
       id: 2,
       title: 'YOU',
+      baseUrl: '/you',
       url: '/you',
       footerMenu: [{ title: '마니또' }, { title: 'M2' }, { title: 'M3' }, { title: '친구' }],
     },
     {
       id: 3,
       title: 'US',
+      baseUrl: '/us',
       url: '/us/hive',
       footerMenu: [{ title: '하이브' }, { title: '내 하이브' }, { title: '비네스북' }, { title: '버즈' }],
     },
   ];
 
   let initialService;
-  switch (useLocation().pathname) {
-    case serviceList[2].url:
-      initialService = serviceList[2];
-      break;
-    case serviceList[1].url:
-      initialService = serviceList[1];
-      break;
-    case serviceList[0].url:
-    default:
-      initialService = serviceList[0];
-      break;
+  const currentPath = useLocation().pathname;
+  if (currentPath.includes(serviceList[2].baseUrl)) {
+    initialService = serviceList[2];
+  } else if (currentPath.includes(serviceList[1].baseUrl)) {
+    initialService = serviceList[1];
+  } else if (currentPath.includes(serviceList[0].baseUrl)) {
+    initialService = serviceList[0];
+  } else {
+    initialService = serviceList[0];
   }
   const [currentService, setCurrentService] = useState(initialService);
 
@@ -72,6 +74,7 @@ function App() {
           <Route path={serviceList[0].url} element={<MeMain />}></Route>
           <Route path={serviceList[1].url} element={<YouMain />}></Route>
           <Route path={serviceList[2].url} element={<UsMain />}></Route>
+          <Route path={serviceList[2].url + '/detail/:id'} element={<HiveDetail />}></Route>
         </Routes>
       </Body>
       <img src={logo} className='App-logo' alt='logo' />

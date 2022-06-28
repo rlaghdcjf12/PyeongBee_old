@@ -3,13 +3,19 @@ import { Container, Row, Col, Badge } from 'react-bootstrap';
 import styled from 'styled-components';
 import Hexagon from '../../common/Hexagon.js';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import { useNavigate } from 'react-router-dom';
 
 const ListItem = (props) => {
   // const { title, list } = props;
   const hexagonRef = useRef();
+  const navigate = useNavigate();
+
+  const goDetail = () => {
+    navigate('./detail/1');
+  };
 
   return (
-    <ItemArea>
+    <ItemArea onClick={goDetail}>
       <ImageArea ref={hexagonRef}>
         <Hexagon
           width={hexagonRef.width}
