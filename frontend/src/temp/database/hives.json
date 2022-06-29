@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "발산역 독서모임",
+    "price": 30000,
+    "location": "발산역",
+    "refundRate": "100",
+    "period": 4,
+    "condition": 20,
+    "air": 88,
+    "currentCount": 17,
+    "maxCount": 25
+  },
+  {
+    "id": 2,
+    "title": "미라클모닝",
+    "price": 10000,
+    "location": "비대면",
+    "refundRate": "100",
+    "period": 2,
+    "condition": 10,
+    "air": 48,
+    "currentCount": 11,
+    "maxCount": 20
+  },
+  {
+    "id": 3,
+    "title": "한강 자전거 모임",
+    "price": 50000,
+    "location": "여의도 한강 공원",
+    "refundRate": "100",
+    "period": 4,
+    "condition": 20,
+    "air": 83,
+    "currentCount": 19,
+    "maxCount": 20
+  },
+  {
+    "id": 4,
+    "title": "지지봉사단",
+    "price": 20000,
+    "location": "서울역 12번 출구",
+    "refundRate": "100",
+    "period": 4,
+    "condition": 20,
+    "air": 66,
+    "currentCount": 17,
+    "maxCount": 30
+  },
+  {
+    "id": 5,
+    "title": "산와머니 등산 모임",
+    "price": 30000,
+    "location": "서울대 건설환경연구소",
+    "refundRate": "100",
+    "period": 4,
+    "condition": 20,
+    "air": 56,
+    "currentCount": 22,
+    "maxCount": 30
+  },
+  {
+    "id": 6,
+    "title": "위클크루 클라이밍",
+    "price": 50000,
+    "location": "캐치스톤클라이밍짐",
+    "refundRate": "40",
+    "period": 4,
+    "condition": 2,
+    "air": 91,
+    "currentCount": 25,
+    "maxCount": 30
+  }
+]

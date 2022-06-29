@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-const Footer = (props) => {
-  const { currentService } = props;
-
+const Footer = ({ currentService }) => {
   return (
     <>
       <EmptyArea />

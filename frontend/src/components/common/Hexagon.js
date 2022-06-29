@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-const Hexagon = (props) => {
-  const { width, height, image, isRegular = false, border = false } = props;
+const Hexagon = ({ width, height, image, isRegular = false, border = false }) => {
   const newHeight = isRegular ? (Number(width?.replace('px', '')) / 2) * 1.73 + 'px' : height;
 
   if (border) {

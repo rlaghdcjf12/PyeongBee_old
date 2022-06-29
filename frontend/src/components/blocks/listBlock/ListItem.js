@@ -5,13 +5,12 @@ import Hexagon from '../../common/Hexagon.js';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useNavigate } from 'react-router-dom';
 
-const ListItem = (props) => {
-  // const { title, list } = props;
+const ListItem = ({ item }) => {
   const hexagonRef = useRef();
   const navigate = useNavigate();
 
   const goDetail = () => {
-    navigate('./detail/1');
+    navigate('./detail/' + item.id);
   };
 
   return (
@@ -27,23 +26,23 @@ const ListItem = (props) => {
       </ImageArea>
       <InfoArea>
         <InfoTitle>
-          <strong>발산역 독서모임 😍</strong>
+          <strong>{item.title}</strong>
         </InfoTitle>
         <InfoCondition>
           <ConditionBadge pill bg='primary'>
             남다른 각오
           </ConditionBadge>
           <ConditionBadge pill bg='success'>
-            발산역
+            {item.location}
           </ConditionBadge>
           <ConditionBadge pill bg='secondary'>
-            100% 환급
+            {item.refundRate}% 환급
           </ConditionBadge>
           <ConditionBadge pill bg='secondary'>
-            2주
+            {item.period}주
           </ConditionBadge>
           <ConditionBadge pill bg='secondary'>
-            10번
+            {item.condition}번
           </ConditionBadge>
         </InfoCondition>
         <InfoAir>

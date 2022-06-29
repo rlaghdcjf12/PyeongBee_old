@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-const Header = (props) => {
-  const { currentService, serviceList, changeService } = props;
-
+const Header = ({ currentService, serviceList, changeService }) => {
   return (
     <HeaderEl>
       <div className='container'>

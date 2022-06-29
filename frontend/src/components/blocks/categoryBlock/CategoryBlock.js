@@ -2,9 +2,7 @@ import CategoryTitleArea from './CategoryTitleArea.js';
 import CategoryItemArea from './CategoryItemArea.js';
 import styled from 'styled-components';
 
-const CategoryBlock = (props) => {
-  const { title, categoryList } = props;
-
+const CategoryBlock = ({ title, categoryList }) => {
   return (
     <CateBlock>
       <CategoryTitleArea title={title} />

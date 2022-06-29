@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-const CategoryTitleArea = (props) => {
-  const { title } = props;
-
+const CategoryTitleArea = ({ title }) => {
   return (
     <Container>
       <Body>{title}</Body>

@@ -2,19 +2,16 @@ import { createRef } from 'react';
 import styled from 'styled-components';
 import ListItem from './ListItem.js';
 
-const ListBlock = (props) => {
-  const { title } = props;
+const ListBlock = ({ title, itemList }) => {
   return (
     <BlockWrapper>
       <TitleArea>
         <strong className='titleText'>{title}</strong>
       </TitleArea>
       <ListArea>
-        <ListItem />
-        <ListItem />
-        <ListItem />
-        <ListItem />
-        <ListItem />
+        {itemList.map((hive) => (
+          <ListItem item={hive} />
+        ))}
       </ListArea>
     </BlockWrapper>
   );

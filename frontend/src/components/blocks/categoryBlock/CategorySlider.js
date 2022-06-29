@@ -6,9 +6,7 @@ import _ from 'lodash';
 
 // TODO : 모바일 웹 터치 동작 구현할 것.
 
-const CategorySlider = (props) => {
-  const { categoryList } = props;
-
+const CategorySlider = ({ categoryList }) => {
   const scrollRef = useRef(null);
 
   const [isDragging, setIsDragging] = useState(false);
