@@ -35,6 +35,7 @@ const CategorySlider = (props) => {
 
   return (
     <Slider
+      itemCount={categoryList.length}
       onMouseDown={handleDragStart}
       onMouseMove={handleThrottleDragMove}
       onMouseUp={handleDragEnd}
@@ -43,7 +44,7 @@ const CategorySlider = (props) => {
     >
       {categoryList?.map((category, idx) => {
         return (
-          <SlideItem key={idx} style={{ marginRight: '1.5vmin' }}>
+          <SlideItem key={idx}>
             <Hexagon image={category.imagePath} border='solid 1px gold' />
             <Text>{category.title}</Text>
           </SlideItem>
@@ -55,16 +56,15 @@ const CategorySlider = (props) => {
 
 const Slider = styled.div`
   display: flex;
-  width: 100%;
   white-space: nowrap;
   overflow: hidden;
-  /* padding-left: max(calc(50% - 400px), 5%); */
-  padding-left: 5%;
+  padding-left: max(calc(50% - ${(props) => props.itemCount * 100}px - ${(props) => props.itemCount - 1}vw), 5%);
 `;
 const SlideItem = styled.div`
   flex-shrink: 0;
-  width: 26%;
+  width: 26vw;
   max-width: 200px;
+  margin-right: 2vw;
 `;
 const Text = styled.span`
   font-size: calc(4px + 2vmin);

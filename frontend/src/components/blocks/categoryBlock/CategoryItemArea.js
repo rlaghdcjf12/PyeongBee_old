@@ -13,9 +13,7 @@ const CategoryItemArea = (props) => {
 
 const Container = styled.div`
   width: 100%;
-  /* max-width: 800px; */
-  max-block-size: calc(800px);
-  margin: 0 auto 10px;
+  margin-bottom: 10px;
 `;
 
 export default CategoryItemArea;
