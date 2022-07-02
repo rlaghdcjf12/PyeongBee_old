@@ -14,84 +14,101 @@ const ListItem = ({ item }) => {
   };
 
   return (
-    <ItemArea onClick={goDetail}>
-      <ImageArea ref={hexagonRef}>
-        <Hexagon
-          width={hexagonRef.width}
-          height={hexagonRef.height}
-          isRegular={false}
-          border='solid 1px gold'
-          image='https://media.istockphoto.com/vectors/yellow-honey-hive-with-cute-bees-hanging-on-a-tree-branch-vector-vector-id1248883563?s=612x612'
-        ></Hexagon>
-      </ImageArea>
-      <InfoArea>
-        <InfoTitle>
-          <strong>{item.title}</strong>
-        </InfoTitle>
-        <InfoCondition>
-          <ConditionBadge pill bg='primary'>
-            남다른 각오
-          </ConditionBadge>
-          <ConditionBadge pill bg='success'>
-            {item.location}
-          </ConditionBadge>
-          <ConditionBadge pill bg='secondary'>
-            {item.refundRate}% 환급
-          </ConditionBadge>
-          <ConditionBadge pill bg='secondary'>
-            {item.period}주
-          </ConditionBadge>
-          <ConditionBadge pill bg='secondary'>
-            {item.condition}번
-          </ConditionBadge>
-        </InfoCondition>
-        <InfoAir>
-          <Col md='2'>분위기 :</Col>
-          <Col md='10'>
-            <ProgressBar
-              variant='warning'
-              now={60}
-              animated
-              label={<span style={{ fontSize: 'calc(1px + 2vmin)', color: 'saddleBrown' }}>보통</span>}
-              style={{ height: '3vmin', margin: '5px 0 5px' }}
-            />
-          </Col>
-        </InfoAir>
-        <InfoPersonnel>
-          <div className='itemTitle'>OOOOO 17명 / 25명</div>
-        </InfoPersonnel>
-      </InfoArea>
+    <ItemArea onClick={goDetail} fluid>
+      <ItemWrapper>
+        <ImageArea ref={hexagonRef} xs={4}>
+          <Hexagon
+            isRegular={false}
+            image={item.images[0]}
+            width={25}
+            height={25}
+            // width={hexagonRef?.current?.width}
+            // height={hexagonRef?.current?.height}
+            unit={'vmin'}
+            border='1px gold'
+          ></Hexagon>
+        </ImageArea>
+        <InfoArea xs={8}>
+          <InfoTitle>
+            <strong>{item.title}</strong>
+          </InfoTitle>
+          <InfoCondition>
+            <ConditionBadge pill bg='primary'>
+              남다른 각오
+            </ConditionBadge>
+            {/* <ConditionBadge pill bg='success'>
+              {item.location}
+            </ConditionBadge>
+            <ConditionBadge pill bg='secondary'>
+              {item.refundRate}% 환급
+            </ConditionBadge> */}
+            {/* <ConditionBadge pill bg='secondary'>
+              {item.period}주
+            </ConditionBadge>
+            <ConditionBadge pill bg='secondary'>
+              {item.condition}번
+            </ConditionBadge> */}
+          </InfoCondition>
+          <InfoAir>
+            <Col xs='3' style={{ paddingRight: '0px' }}>
+              분위기
+            </Col>
+            <Col xs='9'>
+              <ProgressBar
+                variant='warning'
+                now={60}
+                animated
+                label={<span style={{ fontSize: 'calc(1px + 2vmin)', color: 'saddleBrown' }}>보통</span>}
+                style={{ height: '3vmin', margin: '5px 0 5px' }}
+              />
+            </Col>
+          </InfoAir>
+          <InfoPersonnel>
+            <div className='itemTitle'>OOOOO 17명 / 25명</div>
+          </InfoPersonnel>
+          <InfoPersonnel>
+            <div className='itemTitle'>OOOOO 17명 / 25명</div>
+          </InfoPersonnel>
+        </InfoArea>
+      </ItemWrapper>
     </ItemArea>
   );
 };
 
 // styles
-const ItemArea = styled.div`
-  display: flex;
+const ItemArea = styled(Container)`
   width: 100%;
-  max-height: 240px;
-  /* background-color: lightyellow; */
-  padding: 10px 0 10px;
+  padding: 1vmin 1vmin;
+  margin-bottom: 1vmin;
+  &:hover {
+    background-color: lightyellow;
+    border-radius: 30px;
+  }
 `;
-const ImageArea = styled.div`
-  width: 20%;
-  vertical-align: middle;
+const ItemWrapper = styled(Row)`
+  width: 100%;
+  margin: 0 auto;
 `;
-const InfoArea = styled(Container)`
-  width: 80%;
-  padding-left: 10px;
-  line-height: calc(10px + 3vmin);
-  font-size: calc(1px + 2vmin);
+const ImageArea = styled(Col)`
+  padding: 0;
+`;
+const InfoArea = styled(Col)`
+  line-height: min(36px, 5vmin);
+  font-size: min(21px, 2.5vmin);
+  padding-right: 0;
+  padding-left: calc(1px + 2vmin);
 `;
 const InfoTitle = styled(Row)`
-  font-size: calc(4px + 2vmin);
+  font-size: min(25px, 2.7vmin);
 `;
 const InfoCondition = styled.div``;
 const ConditionBadge = styled(Badge)`
   margin-right: 0.8vmin;
 `;
 const InfoAir = styled(Row)`
-  display: flex;
+  /* display: flex; */
 `;
-const InfoPersonnel = styled(Row)``;
+const InfoPersonnel = styled(Row)`
+  /* display: flex; */
+`;
 export default ListItem;

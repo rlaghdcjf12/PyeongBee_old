@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Hexagon from '../../common/Hexagon.js';
 import _ from 'lodash';
 
-// TODO : 모바일 웹 터치 동작 구현할 것.
+// TODO : 모바일 웹 터치 슬라이드 동작 구현할 것.
 
 const CategorySlider = ({ categoryList }) => {
   const scrollRef = useRef(null);
@@ -43,7 +43,7 @@ const CategorySlider = ({ categoryList }) => {
       {categoryList?.map((category, idx) => {
         return (
           <SlideItem key={idx}>
-            <Hexagon image={category.imagePath} border='solid 1px gold' />
+            <Hexagon image={category.imagePath} width={26} height={26} unit='vmin' border='1px gold' />
             <Text>{category.title}</Text>
           </SlideItem>
         );
@@ -51,6 +51,8 @@ const CategorySlider = ({ categoryList }) => {
     </Slider>
   );
 };
+
+// TODO : 카테고리쪽도 vmin으로 단위 통일해서 맞출 것.
 
 const Slider = styled.div`
   display: flex;
