@@ -43,7 +43,7 @@ const CategorySlider = ({ categoryList }) => {
       {categoryList?.map((category, idx) => {
         return (
           <SlideItem key={idx}>
-            <Hexagon image={category.imagePath} width={26} height={26} unit='vmin' border='1px gold' />
+            <Hexagon image={category.imagePath} width={25} height={25} unit='vmin' border='1px gold' />
             <Text>{category.title}</Text>
           </SlideItem>
         );
@@ -58,17 +58,17 @@ const Slider = styled.div`
   display: flex;
   white-space: nowrap;
   overflow: hidden;
-  padding-left: max(calc(50% - ${(props) => props.itemCount * 100}px - ${(props) => props.itemCount - 1}vw), 5%);
+  padding-left: max(calc(50% - ${(props) => props.itemCount * 100}px - ${(props) => props.itemCount - 1}vmin), 5%);
 `;
 const SlideItem = styled.div`
   flex-shrink: 0;
-  width: 26vw;
+  width: 25vmin;
   max-width: 200px;
-  margin-right: 2vw;
+  margin-right: 2vmin;
 `;
 const Text = styled.span`
   font-size: calc(4px + 2vmin);
-  text-align: center;
+  /* text-align: center; */
 `;
 
 export default CategorySlider;

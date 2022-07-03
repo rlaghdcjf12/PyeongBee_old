@@ -1,12 +1,10 @@
-import { useRef } from 'react';
 import { Container, Row, Col, Badge } from 'react-bootstrap';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Hexagon from '../../common/Hexagon.js';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useNavigate } from 'react-router-dom';
 
 const ListItem = ({ item }) => {
-  const hexagonRef = useRef();
   const navigate = useNavigate();
 
   const goDetail = () => {
@@ -16,21 +14,21 @@ const ListItem = ({ item }) => {
   return (
     <ItemArea onClick={goDetail} fluid>
       <ItemWrapper>
-        <ImageArea ref={hexagonRef} xs={4}>
-          <Hexagon
-            isRegular={false}
-            image={item.images[0]}
-            width={25}
-            height={25}
-            // width={hexagonRef?.current?.width}
-            // height={hexagonRef?.current?.height}
-            unit={'vmin'}
-            border='1px gold'
-          ></Hexagon>
+        <ImageArea xs={4}>
+          <Hexagon image={item.images[0]} width={25} height={25} unit='vmin' border='1px gold'></Hexagon>
         </ImageArea>
         <InfoArea xs={8}>
           <InfoTitle>
-            <strong>{item.title}</strong>
+            <SimpleCol xs={8}>
+              <strong>{item.title}</strong>
+            </SimpleCol>
+            <SimpleCol
+              style={{
+                fontSize: 'calc(2px + 2vmin)',
+              }}
+            >
+              {item.location}
+            </SimpleCol>
           </InfoTitle>
           <InfoCondition>
             <ConditionBadge pill bg='primary'>
@@ -76,13 +74,18 @@ const ListItem = ({ item }) => {
 };
 
 // styles
+const simpleText = css`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
 const ItemArea = styled(Container)`
   width: 100%;
   padding: 1vmin 1vmin;
   margin-bottom: 1vmin;
   &:hover {
     background-color: lightyellow;
-    border-radius: 30px;
+    border-radius: 2.5vmin;
   }
 `;
 const ItemWrapper = styled(Row)`
@@ -94,9 +97,13 @@ const ImageArea = styled(Col)`
 `;
 const InfoArea = styled(Col)`
   line-height: min(36px, 5vmin);
-  font-size: min(21px, 2.5vmin);
-  padding-right: 0;
+  padding-right: 3vmin;
   padding-left: calc(1px + 2vmin);
+  font-size: min(21px, 2.5vmin);
+  text-align: left;
+`;
+const SimpleCol = styled(Col)`
+  ${simpleText};
 `;
 const InfoTitle = styled(Row)`
   font-size: min(25px, 2.7vmin);

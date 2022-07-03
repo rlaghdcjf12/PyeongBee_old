@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CategoryTitleArea = ({ title }) => {
+const TitleArea = ({ title }) => {
   return (
     <Container>
       <Body>{title}</Body>
@@ -8,6 +8,7 @@ const CategoryTitleArea = ({ title }) => {
   );
 };
 
+// styles
 const Container = styled.div`
   text-align: left;
   width: 90%;
@@ -19,4 +20,4 @@ const Body = styled.strong`
   font-size: calc(10px + 2vmin);
 `;
 
-export default CategoryTitleArea;
+export default TitleArea;

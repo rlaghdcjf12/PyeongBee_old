@@ -27,7 +27,7 @@ const UsMain = () => {
       </TopBlock>
       <CategoryBlock title='나를 가꾸는 하이브' categoryList={selfCareCategoryList} />
       <CategoryBlock title='현재를 즐기는 하이브' categoryList={happyCategoryList} />
-      <div>필터</div>
+      {/* <div>필터</div> */}
       <ListBlock title='모든 하이브' itemList={HiveList} />
       {/* <ListBlock title='인기 하이브' />
       <ListBlock title='참여했던 하이브' />

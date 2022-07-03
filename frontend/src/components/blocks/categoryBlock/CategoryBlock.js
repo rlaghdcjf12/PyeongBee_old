@@ -1,16 +1,12 @@
-import CategoryTitleArea from './CategoryTitleArea.js';
-import CategoryItemArea from './CategoryItemArea.js';
-import styled from 'styled-components';
+import BlockWrapper from '../../common/BlockWrapper.js';
+import CategoryArea from './CategoryArea.js';
 
 const CategoryBlock = ({ title, categoryList }) => {
   return (
-    <CateBlock>
-      <CategoryTitleArea title={title} />
-      <CategoryItemArea categoryList={categoryList} />
-    </CateBlock>
+    <BlockWrapper title={title}>
+      <CategoryArea categoryList={categoryList} />
+    </BlockWrapper>
   );
 };
-
-const CateBlock = styled.div``;
 
 export default CategoryBlock;
