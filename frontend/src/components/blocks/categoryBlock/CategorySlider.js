@@ -68,7 +68,6 @@ const SlideItem = styled.div`
 `;
 const Text = styled.span`
   font-size: calc(4px + 2vmin);
-  /* text-align: center; */
 `;
 
 export default CategorySlider;
