@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import Hexagon from '../../common/Hexagon.js';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useNavigate } from 'react-router-dom';
+import { MdOutlineLocationOn } from 'react-icons/md';
 
 const ListItem = ({ item }) => {
   const navigate = useNavigate();
@@ -11,15 +12,25 @@ const ListItem = ({ item }) => {
     navigate('./detail/' + item.id);
   };
 
+  const computedAir = () => {
+    if (item?.air > 80) {
+      return { variant: 'danger', title: '활기참', color: 'white' };
+    } else if (item?.air > 30) {
+      return { variant: 'warning', title: '보통', color: 'saddleBrown' };
+    } else {
+      return { variant: 'info', title: '차분함', color: 'white' };
+    }
+  };
+
   return (
     <ItemArea onClick={goDetail} fluid>
       <ItemWrapper>
-        <ImageArea xs={4}>
+        <ImageArea xs={4} md={3}>
           <Hexagon image={item.images[0]} width={25} height={25} unit='vmin' border='1px gold'></Hexagon>
         </ImageArea>
-        <InfoArea xs={8}>
+        <InfoArea xs={8} md={9}>
           <InfoTitle>
-            <SimpleCol xs={8}>
+            <SimpleCol xs={7}>
               <strong>{item.title}</strong>
             </SimpleCol>
             <SimpleCol
@@ -27,9 +38,28 @@ const ListItem = ({ item }) => {
                 fontSize: 'calc(2px + 2vmin)',
               }}
             >
+              <MdOutlineLocationOn />
               {item.location}
             </SimpleCol>
           </InfoTitle>
+          <InfoAir>
+            <Col xs={3} style={{ paddingRight: '0px' }}>
+              분위기
+            </Col>
+            <Col xs={9}>
+              <ProgressBar
+                variant={computedAir().variant}
+                now={item.air}
+                animated
+                label={
+                  <span style={{ fontSize: 'calc(1px + 2vmin)', color: computedAir().color }}>
+                    {computedAir().title}
+                  </span>
+                }
+                style={{ height: '3vmin', margin: '5px 0 5px' }}
+              />
+            </Col>
+          </InfoAir>
           <InfoCondition>
             <ConditionBadge pill bg='primary'>
               남다른 각오
@@ -47,20 +77,6 @@ const ListItem = ({ item }) => {
               {item.condition}번
             </ConditionBadge> */}
           </InfoCondition>
-          <InfoAir>
-            <Col xs='3' style={{ paddingRight: '0px' }}>
-              분위기
-            </Col>
-            <Col xs='9'>
-              <ProgressBar
-                variant='warning'
-                now={60}
-                animated
-                label={<span style={{ fontSize: 'calc(1px + 2vmin)', color: 'saddleBrown' }}>보통</span>}
-                style={{ height: '3vmin', margin: '5px 0 5px' }}
-              />
-            </Col>
-          </InfoAir>
           <InfoPersonnel>
             <div className='itemTitle'>OOOOO 17명 / 25명</div>
           </InfoPersonnel>
@@ -74,7 +90,7 @@ const ListItem = ({ item }) => {
 };
 
 // styles
-const simpleText = css`
+const shortText = css`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -97,25 +113,25 @@ const ImageArea = styled(Col)`
 `;
 const InfoArea = styled(Col)`
   line-height: min(36px, 5vmin);
-  padding-right: 3vmin;
-  padding-left: calc(1px + 2vmin);
+  padding: 0 2vmin;
   font-size: min(21px, 2.5vmin);
   text-align: left;
 `;
 const SimpleCol = styled(Col)`
-  ${simpleText};
+  ${shortText};
 `;
 const InfoTitle = styled(Row)`
   font-size: min(25px, 2.7vmin);
+  margin-right: 0;
 `;
 const InfoCondition = styled.div``;
 const ConditionBadge = styled(Badge)`
   margin-right: 0.8vmin;
 `;
 const InfoAir = styled(Row)`
-  /* display: flex; */
+  margin-right: 0;
 `;
 const InfoPersonnel = styled(Row)`
-  /* display: flex; */
+  margin-right: 0;
 `;
 export default ListItem;

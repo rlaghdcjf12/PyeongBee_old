@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import Figure from 'react-bootstrap/Figure';
 
 const Hexagon = ({ type = 'horizontal', isRegular = false, image, width, height, unit = 'px', border = false }) => {
   const newHeight = isRegular ? (width / 2) * 1.73 : height;
@@ -8,7 +9,7 @@ const Hexagon = ({ type = 'horizontal', isRegular = false, image, width, height,
       {image ? (
         <Image width={width} height={newHeight} unit={unit} src={image} alt='bee hive'></Image>
       ) : (
-        <div>기본 이미지</div>
+        <Figure.Image width='100%' height='100%' src={image} alt='bee hive'></Figure.Image>
       )}
     </Hexa>
   );
@@ -34,7 +35,12 @@ const Hexagon = ({ type = 'horizontal', isRegular = false, image, width, height,
     return hexaImage;
   }
 };
-
+const baseSize = css`
+  width: ${(props) => props.width}${(props) => props.unit};
+  height: ${(props) => props.height}${(props) => props.unit};
+  max-width: 180px;
+  max-height: 180px;
+`;
 const Border = styled.div`
   /* clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); // 세로 정육각형 */
   clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 0 50%); // 가로 정육각형
@@ -48,17 +54,12 @@ const Border = styled.div`
 const Hexa = styled.div`
   /* clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); // 세로 정육각형 */
   clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 0 50%); // 가로 정육각형
-  width: ${(props) => props.width}${(props) => props.unit};
-  height: ${(props) => props.height}${(props) => props.unit};
-  max-width: 180px;
-  max-height: 180px;
-  object-fit: cover;
+  ${baseSize}
 `;
 const Image = styled.img`
   object-fit: cover;
-  width: ${(props) => props.height}${(props) => props.unit};
-  height: ${(props) => props.height}${(props) => props.unit};
-  max-width: 180px;
-  max-height: 180px;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 1rem;
 `;
 export default Hexagon;
