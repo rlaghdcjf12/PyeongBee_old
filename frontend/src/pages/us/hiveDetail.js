@@ -20,7 +20,7 @@ const HiveDetail = () => {
   return (
     <DetailBlock isTitle={false}>
       <ImageArea>
-        <Carousel itemList={hive?.images} />
+        <Carousel itemList={hive?.images} interval={2000} />
       </ImageArea>
       <IntroArea>
         <CategoryArea>
@@ -31,18 +31,18 @@ const HiveDetail = () => {
           </LogoArea>
           <TextArea>{hive.title}</TextArea>
         </CategoryArea>
-        <Row style={{ marginBottom: '20px' }}>
-          <Col style={{ textAlign: 'center', fontSize: '20px', borderRight: '1px solid gold' }}>
+        <Row style={{ marginBottom: '4vmin' }}>
+          <Col style={{ textAlign: 'center', fontSize: 'calc(12px + 1vmin)', borderRight: '1px solid gold' }}>
             <Row style={{ marginBottom: '10px' }}>
               <Col>
                 <MdStar /> 4.5
               </Col>
             </Row>
             <Row>
-              <Col>최근 3달 평균</Col>
+              <Col style={{ fontSize: 'calc(10px + 1vmin)' }}>최근 3달</Col>
             </Row>
           </Col>
-          <Col style={{ textAlign: 'center', fontSize: '20px', borderRight: '1px solid gold' }}>
+          <Col style={{ textAlign: 'center', fontSize: 'calc(12px + 1vmin)', borderRight: '1px solid gold' }}>
             <Row style={{ marginBottom: '10px' }}>
               <Col>4주</Col>
             </Row>
@@ -50,15 +50,15 @@ const HiveDetail = () => {
               <Col>20번</Col>
             </Row>
           </Col>
-          <Col style={{ textAlign: 'center', fontSize: '20px', borderRight: '1px solid gold' }}>
+          <Col style={{ textAlign: 'center', fontSize: 'calc(12px + 1vmin)', borderRight: '1px solid gold' }}>
             <Row style={{ marginBottom: '10px' }}>
               <Col>등급</Col>
             </Row>
             <Row>
-              <Col>남다른 각오</Col>
+              <Col style={{ fontSize: 'calc(12px + 0.5vmin)' }}>남다른각오</Col>
             </Row>
           </Col>
-          <Col style={{ textAlign: 'center', fontSize: '20px' }}>
+          <Col style={{ textAlign: 'center', fontSize: 'calc(12px + 1vmin)' }}>
             <Row style={{ marginBottom: '10px' }}>
               <Col>운영비</Col>
             </Row>
@@ -77,17 +77,51 @@ const HiveDetail = () => {
           </Alert>
         </Row>
         <Row>
+          <TitleArea title='함께하는 챌린지'></TitleArea>
+          <Row style={{ marginBottom: '10px', paddingLeft: '5%' }}>
+            필수 챌린지, 선택 챌린지
+            <br />
+            <br />
+            국회나 그 위원회의 요구가 있을 때에는 국무총리·국무위원 또는 정부위원은 출석·답변하여야 하며, 국무총리 또는
+            국무위원이 출석요구를 받은 때에는 국무위원 또는 정부위원으로 하여금 출석·답변하게 할 수 있다. <br />
+            <br />
+            공무원은 국민전체에 대한 봉사자이며, 국민에 대하여 책임을 진다. 모든 국민은 법률이 정하는 바에 의하여
+            공무담임권을 가진다. 대한민국은 국제평화의 유지에 노력하고 침략적 전쟁을 부인한다. <br />
+            <br />
+            명령·규칙 또는 처분이 헌법이나 법률에 위반되는 여부가 재판의 전제가 된 경우에는 대법원은 이를 최종적으로
+            심사할 권한을 가진다. 대법원장과 대법관이 아닌 법관의 임기는 10년으로 하며, 법률이 정하는 바에 의하여 연임할
+            수 있다.
+          </Row>
+        </Row>
+        <Row>
           <TitleArea title='하이브에 대해서'></TitleArea>
+          <Row style={{ marginBottom: '10px', paddingLeft: '5%' }}>
+            국회나 그 위원회의 요구가 있을 때에는 국무총리·국무위원 또는 정부위원은 출석·답변하여야 하며, 국무총리 또는
+            국무위원이 출석요구를 받은 때에는 국무위원 또는 정부위원으로 하여금 출석·답변하게 할 수 있다. <br />
+            <br />
+            공무원은 국민전체에 대한 봉사자이며, 국민에 대하여 책임을 진다. 모든 국민은 법률이 정하는 바에 의하여
+            공무담임권을 가진다. 대한민국은 국제평화의 유지에 노력하고 침략적 전쟁을 부인한다. <br />
+            <br />
+            명령·규칙 또는 처분이 헌법이나 법률에 위반되는 여부가 재판의 전제가 된 경우에는 대법원은 이를 최종적으로
+            심사할 권한을 가진다. 대법원장과 대법관이 아닌 법관의 임기는 10년으로 하며, 법률이 정하는 바에 의하여 연임할
+            수 있다.
+          </Row>
         </Row>
         <Row>
           <TitleArea title='방장에 대해서'></TitleArea>
+          <Row style={{ marginBottom: '10px', paddingLeft: '5%' }}>
+            국가는 건전한 소비행위를 계도하고 생산품의 품질향상을 촉구하기 위한 소비자보호운동을 법률이 정하는 바에
+            의하여 보장한다. 행정각부의 설치·조직과 직무범위는 법률로 정한다. 재산권의 행사는 공공복리에 적합하도록
+            하여야 한다.
+          </Row>
         </Row>
         <Row>
           <TitleArea title='함께하는 사람들'></TitleArea>
         </Row>
-        <Row>
+        {/* <Row>
           <TitleArea title='다른 추천 하이브'></TitleArea>
-        </Row>
+        </Row> */}
+        맨 밑에 참여하기 버튼 플로팅되게. 맨 아래에선 플로팅이 아니라 페이지에 박히고.
       </IntroArea>
     </DetailBlock>
   );
