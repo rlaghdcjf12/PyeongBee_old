@@ -12,13 +12,21 @@ const Header = ({ currentService, serviceList, changeService }) => {
         </FirstHeader>
         <SecondHeader className='row'>
           <div className='col-2' onClick={() => changeService(serviceList[0])}>
-            {currentService?.id === 1 ? <Active>{serviceList[0].title}</Active> : <Btn>{serviceList[0].title}</Btn>}
+            {currentService?.id === 1 ? (
+              <Active>{serviceList[0].title}</Active>
+            ) : (
+              <Btn>{serviceList[0].title}</Btn>
+            )}
           </div>
-          <div className='col-2' onClick={() => changeService(serviceList[1])}>
+          {/* <div className='col-2' onClick={() => changeService(serviceList[1])}>
             {currentService?.id === 2 ? <Active>{serviceList[1].title}</Active> : <Btn>{serviceList[1].title}</Btn>}
-          </div>
+          </div> */}
           <div className='col-2' onClick={() => changeService(serviceList[2])}>
-            {currentService?.id === 3 ? <Active>{serviceList[2].title}</Active> : <Btn>{serviceList[2].title}</Btn>}
+            {currentService?.id === 3 ? (
+              <Active>{serviceList[2].title}</Active>
+            ) : (
+              <Btn>{serviceList[2].title}</Btn>
+            )}
           </div>
         </SecondHeader>
       </div>

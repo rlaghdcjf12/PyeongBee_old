@@ -7,7 +7,7 @@ const ListBlock = ({ title, itemList }) => {
     <BlockWrapper title={title}>
       <ListArea>
         {itemList.map((hive) => (
-          <ListItem item={hive} />
+          <ListItem item={hive} key={hive.id} />
         ))}
       </ListArea>
     </BlockWrapper>

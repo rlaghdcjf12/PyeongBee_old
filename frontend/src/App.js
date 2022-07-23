@@ -18,21 +18,36 @@ function App() {
       title: 'ME',
       baseUrl: '/me',
       url: '/me',
-      footerMenu: [{ title: '자아' }, { title: '꿈' }, { title: '추억' }, { title: '분석' }],
+      footerMenu: [
+        { title: '자아' },
+        // { title: "꿈" },
+        // { title: "추억" },
+        // { title: "분석" },
+      ],
     },
     {
       id: 2,
       title: 'YOU',
       baseUrl: '/you',
       url: '/you',
-      footerMenu: [{ title: '마니또' }, { title: 'M2' }, { title: 'M3' }, { title: '친구' }],
+      footerMenu: [
+        { title: '마니또' },
+        { title: 'M2' },
+        { title: 'M3' },
+        { title: '친구' },
+      ],
     },
     {
       id: 3,
       title: 'US',
       baseUrl: '/us',
       url: '/us/hive',
-      footerMenu: [{ title: '하이브' }, { title: '내 하이브' }, { title: '비네스북' }, { title: '버즈' }],
+      footerMenu: [
+        { title: '하이브' },
+        { title: '내 하이브' },
+        // { title: "비네스북" },
+        { title: '버즈' },
+      ],
     },
   ];
 
@@ -67,21 +82,33 @@ function App() {
 
   return (
     <AppBase>
-      <Header serviceList={serviceList} currentService={currentService} changeService={changeService} />
+      <Header
+        serviceList={serviceList}
+        currentService={currentService}
+        changeService={changeService}
+      />
       <Body>
         <Routes>
           <Route path='/' element={<MeMain />}></Route>
           <Route path={serviceList[0].url} element={<MeMain />}></Route>
           <Route path={serviceList[1].url} element={<YouMain />}></Route>
           <Route path={serviceList[2].url} element={<UsMain />}></Route>
-          <Route path={serviceList[2].url + '/detail/:id'} element={<HiveDetail />}></Route>
+          <Route
+            path={serviceList[2].url + '/detail/:id'}
+            element={<HiveDetail />}
+          ></Route>
         </Routes>
       </Body>
       <img src={logo} className='App-logo' alt='logo' />
       <p>
         Edit <code>src/App.js</code> and save to reload.
       </p>
-      <a className='App-link' href='https://reactjs.org' target='_blank' rel='noopener noreferrer'>
+      <a
+        className='App-link'
+        href='https://reactjs.org'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
         Learn React !
       </a>
       <Footer currentService={currentService} />

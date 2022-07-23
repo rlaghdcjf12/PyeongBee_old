@@ -1,13 +1,13 @@
-import styled, { css } from "styled-components";
-import Figure from "react-bootstrap/Figure";
+import styled, { css } from 'styled-components';
+import Figure from 'react-bootstrap/Figure';
 
 const Hexagon = ({
-  type = "horizontal",
+  type = 'horizontal',
   isRegular = false,
   image,
   width,
   height,
-  unit = "px",
+  unit = 'px',
   border = false,
 }) => {
   const newHeight = isRegular ? (width / 2) * 1.73 : height;
@@ -22,22 +22,22 @@ const Hexagon = ({
           height={newHeight}
           unit={unit}
           src={image}
-          alt="bee hive"
+          alt='bee hive'
         ></Image>
       ) : (
         <Figure.Image
-          width="100%"
-          height="100%"
+          width='100%'
+          height='100%'
           src={image}
-          alt="bee hive"
+          alt='bee hive'
         ></Figure.Image>
       )}
     </Hexa>
   );
 
   if (border) {
-    const borderSpec = border.split(" ");
-    const borderWeight = Number(borderSpec[0].replace("px", ""));
+    const borderSpec = border.split(' ');
+    const borderWeight = Number(borderSpec[0].replace('px', ''));
 
     return (
       <Border

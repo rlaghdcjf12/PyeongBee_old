@@ -4,16 +4,22 @@ const Footer = ({ currentService }) => {
   return (
     <>
       <EmptyArea />
-      <FooterEl>
-        <nav className='container'>
-          <div className='row'>
-            <Btn className='col-3'>{currentService?.footerMenu[0].title}</Btn>
-            <Btn className='col-3'>{currentService?.footerMenu[1].title}</Btn>
-            <Btn className='col-3'>{currentService?.footerMenu[2].title}</Btn>
-            <Btn className='col-3'>{currentService?.footerMenu[3].title}</Btn>
-          </div>
-        </nav>
-      </FooterEl>
+      {currentService?.footerMenu.length > 1 && (
+        <FooterEl>
+          <nav className='container'>
+            <div className='row'>
+              <Btn className='col'>{currentService?.footerMenu[0].title}</Btn>
+              <Btn className='col'>{currentService?.footerMenu[1].title}</Btn>
+              {currentService?.footerMenu.length > 2 && (
+                <Btn className='col'>{currentService?.footerMenu[2].title}</Btn>
+              )}
+              {currentService?.footerMenu.length > 3 && (
+                <Btn className='col'>{currentService?.footerMenu[3].title}</Btn>
+              )}
+            </div>
+          </nav>
+        </FooterEl>
+      )}
     </>
   );
 };

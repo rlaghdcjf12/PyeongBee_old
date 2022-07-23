@@ -2,7 +2,10 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import CategoryBlock from '../../components/blocks/categoryBlock/CategoryBlock.js';
 import ListBlock from '../../components/blocks/listBlock/ListBlock.js';
-import { SelfCareCategoryList, HappyCategoryList } from '../../temp/database/categories.js';
+import {
+  SelfCareCategoryList,
+  HappyCategoryList,
+} from '../../temp/database/categories.js';
 import HiveList from '../../temp/database/hives.json';
 
 const UsMain = () => {
@@ -25,8 +28,14 @@ const UsMain = () => {
           />
         </TopImageArea>
       </TopBlock>
-      <CategoryBlock title='나를 가꾸는 하이브' categoryList={selfCareCategoryList} />
-      <CategoryBlock title='현재를 즐기는 하이브' categoryList={happyCategoryList} />
+      <CategoryBlock
+        title='나를 가꾸는 하이브'
+        categoryList={selfCareCategoryList}
+      />
+      <CategoryBlock
+        title='현재를 즐기는 하이브'
+        categoryList={happyCategoryList}
+      />
       {/* <div>필터</div> */}
       <ListBlock title='모든 하이브' itemList={HiveList} />
       {/* <ListBlock title='인기 하이브' />
