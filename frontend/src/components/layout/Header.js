@@ -28,7 +28,11 @@ const Header = ({ currentService, serviceList, changeService }) => {
 
   return (
     <>
-      <HeaderContainer collapseOnSelect expand='sm' headerHide={headerHide}>
+      <HeaderContainer
+        collapseOnSelect
+        expand='sm'
+        headerhide={headerHide ? 'true' : 'false'}
+      >
         <Container>
           <Logo onClick={() => changeService(serviceList[0])}>
             <Image
@@ -47,7 +51,7 @@ const Header = ({ currentService, serviceList, changeService }) => {
               navbar
             >
               <Service
-                active={currentService?.id === 1}
+                active={currentService?.id === 1 ? 'true' : 'false'}
                 onClick={() => changeService(serviceList[0])}
               >
                 Me
@@ -59,7 +63,7 @@ const Header = ({ currentService, serviceList, changeService }) => {
                 You
               </Service> */}
               <Service
-                active={currentService?.id === 3}
+                active={currentService?.id === 3 ? 'true' : 'false'}
                 onClick={() => changeService(serviceList[2])}
               >
                 Us
@@ -76,7 +80,7 @@ const Header = ({ currentService, serviceList, changeService }) => {
 // styles
 const HeaderContainer = styled(Navbar)`
   position: fixed;
-  display: ${(props) => (props.headerHide === true ? 'none' : 'block')};
+  display: ${(props) => (props.headerhide === 'true' ? 'none' : 'block')};
   z-index: 10;
   width: 100vw;
   padding: 0;
@@ -90,13 +94,13 @@ const Logo = styled(Navbar.Brand)`
 `;
 const Service = styled(Nav.Item)`
   margin: 0 10px;
-  font-weight: ${(props) => (props.active ? '600' : '0')};
+  font-weight: ${(props) => (props.active === 'true' ? '600' : '0')};
   font-size: 22px;
-  color: ${(props) => (props.active ? 'black' : 'gray')};
+  color: ${(props) => (props.active === 'true' ? 'black' : 'gray')};
   cursor: pointer;
 `;
 const EmptyArea = styled.div`
-  display: ${(props) => (props.headerHide === true ? 'none' : 'block')};
+  display: ${(props) => (props.headerHide === 'true' ? 'none' : 'block')};
   height: 52px;
 `;
 
