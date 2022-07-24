@@ -16,8 +16,8 @@ const UsMain = () => {
     <div>
       <TopBlock>
         <TopTextArea>
-          <strong>하이브</strong>
-          <p>다른 꿀벌들이 모여 있는 하이브를 둘러보세요</p>
+          <strong>둥지</strong>
+          <p>다른 꿀벌들이 모여 있는 둥지들을 둘러보세요</p>
         </TopTextArea>
         <TopImageArea>
           <img
@@ -29,15 +29,15 @@ const UsMain = () => {
         </TopImageArea>
       </TopBlock>
       <CategoryBlock
-        title='나를 가꾸는 하이브'
+        title='나를 가꾸는 둥지'
         categoryList={selfCareCategoryList}
       />
       <CategoryBlock
-        title='현재를 즐기는 하이브'
+        title='현재를 즐기는 둥지'
         categoryList={happyCategoryList}
       />
       {/* <div>필터</div> */}
-      <ListBlock title='모든 하이브' itemList={HiveList} />
+      <ListBlock title='모든 둥지' itemList={HiveList} />
       {/* <ListBlock title='인기 하이브' />
       <ListBlock title='참여했던 하이브' />
       <ListBlock title='활기찬 하이브' />

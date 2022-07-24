@@ -43,8 +43,8 @@ function App() {
       baseUrl: '/us',
       url: '/us/hive',
       footerMenu: [
-        { title: '하이브' },
-        { title: '내 하이브' },
+        { title: '둥지' },
+        { title: '내 둥지' },
         // { title: "비네스북" },
         { title: '버즈' },
       ],
