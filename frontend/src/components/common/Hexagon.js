@@ -9,11 +9,13 @@ const Hexagon = ({
   height,
   unit = 'px',
   border = false,
+  color = 'Gold',
 }) => {
   const newHeight = isRegular ? (width / 2) * 1.73 : height;
 
   // TODO : image alt text 값 item에 따라서 바뀌도록 수정할 것.
 
+  console.log(image);
   const hexaImage = (
     <Hexa width={width} height={newHeight} unit={unit}>
       {image ? (
@@ -25,12 +27,7 @@ const Hexagon = ({
           alt='bee hive'
         ></Image>
       ) : (
-        <Figure.Image
-          width='100%'
-          height='100%'
-          src={image}
-          alt='bee hive'
-        ></Figure.Image>
+        <DefaultColor color={color} />
       )}
     </Hexa>
   );
@@ -100,5 +97,10 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   margin-bottom: 1rem;
+`;
+const DefaultColor = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: ${(props) => props.color};
 `;
 export default Hexagon;

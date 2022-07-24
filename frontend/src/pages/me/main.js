@@ -2,42 +2,10 @@ import { Alert, Card } from 'react-bootstrap';
 import Image from 'react-bootstrap/esm/Image.js';
 import styled from 'styled-components';
 import Hexagon from '../../components/common/Hexagon.js';
+import { getUser } from '../../temp/database/users.js';
 
 const MeMain = () => {
-  const activityCheckList = [
-    { day: 'sun', count: 4 },
-    { day: 'mon', count: 2 },
-    { day: 'tue', count: 3 },
-    { day: 'wed', count: 7 },
-    { day: 'thu', count: 2 },
-    { day: 'fri', count: 4 },
-    { day: 'sat', count: 4 },
-    { day: 'sun', count: 4 },
-    { day: 'mon', count: 3 },
-    { day: 'tue', count: 7 },
-    { day: 'wed', count: 1 },
-    { day: 'thu', count: 1 },
-    { day: 'fri', count: 5 },
-    { day: 'sat', count: 2 },
-    { day: 'sun', count: 3 },
-    { day: 'mon', count: 2 },
-    { day: 'tue', count: 1 },
-    { day: 'wed', count: 5 },
-    { day: 'thu', count: 3 },
-    { day: 'fri', count: 4 },
-    { day: 'sat', count: 3 },
-  ];
-
-  let activityWeekList = [];
-
-  activityCheckList.map((act) => {
-    var weekCount = 0;
-    if (act.day === 'sun') {
-      const week = [];
-      week.push(act);
-      weekCount += 1;
-    }
-  });
+  const user = getUser(1);
 
   return (
     <>
@@ -63,27 +31,51 @@ const MeMain = () => {
           ></Hexagon>
         </HexagonContainer>
         <NameContainer>
-          <Title>Lv.1</Title>&nbsp;
-          <Title>근면성실한</Title>&nbsp;
-          <NickName>찌롱</NickName>
+          <Title>Lv.{user?.lv}</Title>&nbsp;
+          <Title>{user?.title}</Title>&nbsp;
+          <NickName>{user?.name}</NickName>
         </NameContainer>
       </Profile>
       <BodyContainer>
         <RetroBlock>
           <MessageCloud>오늘의 회고 하기</MessageCloud>
-          <ActivityFarm>
-            {activityCheckList.map((activity) => {})}
-            <ActivityWeek>
-              <Card.Title>ActivityFarm</Card.Title>
-              <Activity></Activity>
-              <Activity></Activity>
-              <Activity></Activity>
-              <Activity></Activity>
-              <Activity></Activity>
-              <Activity></Activity>
-              <Activity></Activity>
-            </ActivityWeek>
-          </ActivityFarm>
+          <HoneyContainer>
+            <HoneyWrapper>
+              <HoneyTitle>나의 꿀통</HoneyTitle>
+              <HoneyBody>
+                {user?.activityList?.map((week, wi) => (
+                  <HoneyCol key={wi} index={wi}>
+                    {week.map((day, di) => (
+                      <Honey key={di}>
+                        <Hexagon
+                          width={3.6}
+                          height={3.2}
+                          unit='vmin'
+                          border='1px Beige'
+                          color={
+                            day?.count >= 5
+                              ? '#EBB601'
+                              : day?.count >= 3
+                              ? 'Gold'
+                              : day?.count >= 1
+                              ? '#FFEE7B'
+                              : 'white'
+                          }
+                        />
+                      </Honey>
+                    ))}
+                    <HoneyDay>
+                      {5 * (wi + 1) === 100
+                        ? '☆'
+                        : (wi + 1) % 2 === 0
+                        ? 5 * (wi + 1)
+                        : ''}
+                    </HoneyDay>
+                  </HoneyCol>
+                ))}
+              </HoneyBody>
+            </HoneyWrapper>
+          </HoneyContainer>
         </RetroBlock>
         <div>ME 서비스의 메인 페이지 입니다.</div>
       </BodyContainer>
@@ -128,24 +120,44 @@ const BodyContainer = styled.div`
 `;
 const RetroBlock = styled.div``;
 const MessageCloud = styled(Alert)`
-  width: min(90vw, 500px);
+  width: 90vmin;
+  /* height: 10vh; */
   margin: 10px auto;
   font-size: max(20px, 3vmin);
-  line-height: max(20px, 3vmin);
+  /* line-height: max(20px, 3vmin); */
 `;
-const ActivityFarm = styled(Card)`
-  width: 90vw;
+const HoneyContainer = styled(Card)`
+  width: 90vmin;
   margin: 10px auto;
-  background-color: green;
+  overflow: hidden;
 `;
-const ActivityWeek = styled(Card.Body)``;
-const Activity = styled.div`
-  width: 13px;
-  height: 13px;
-  margin: 2px;
-  background-color: skyblue;
-
-  border: 1px solid blue;
+const HoneyWrapper = styled(Card.Body)`
+  padding-right: 1vw;
+  padding-left: 1vw;
+  margin: 0 auto;
+  text-align: left;
+`;
+const HoneyTitle = styled(Card.Title)`
+  font-size: min(4vw, 28px);
+`;
+const HoneyBody = styled.div`
+  display: flex;
+  margin-bottom: 2vmin;
+  text-align: center;
+`;
+const HoneyCol = styled.div`
+  position: relative;
+  top: ${(props) => (props.index % 2 === 1 ? '2.5vmin' : '')};
+  /* display: ; */
+`;
+const Honey = styled.div`
+  width: 4vmin;
+  margin-bottom: 0.6vw;
+`;
+const HoneyDay = styled.span`
+  position: relative;
+  top: -4px;
+  font-size: min(2.5vw, 20px);
 `;
 
 export default MeMain;
