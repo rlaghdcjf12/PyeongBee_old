@@ -1,8 +1,8 @@
 import { Alert, Card } from 'react-bootstrap';
 import Image from 'react-bootstrap/esm/Image.js';
 import styled from 'styled-components';
-import Hexagon from '../../components/common/Hexagon.js';
-import { getUser } from '../../temp/database/users.js';
+import Hexagon from 'components/common/Hexagon.js';
+import { getUser } from 'resources/database/users.js';
 
 const MeMain = () => {
   const user = getUser(1);

@@ -15,7 +15,6 @@ const Hexagon = ({
 
   // TODO : image alt text 값 item에 따라서 바뀌도록 수정할 것.
 
-  console.log(image);
   const hexaImage = (
     <Hexa width={width} height={newHeight} unit={unit}>
       {image ? (

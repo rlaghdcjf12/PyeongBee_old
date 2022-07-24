@@ -12,6 +12,7 @@ import HiveDetail from './pages/us/hiveDetail';
 
 function App() {
   const navigate = useNavigate();
+
   const serviceList = [
     {
       id: 1,

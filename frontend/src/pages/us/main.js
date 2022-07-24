@@ -5,8 +5,8 @@ import ListBlock from '../../components/blocks/listBlock/ListBlock.js';
 import {
   SelfCareCategoryList,
   HappyCategoryList,
-} from '../../temp/database/categories.js';
-import HiveList from '../../temp/database/hives.json';
+} from '../../resources/database/categories.js';
+import HiveList from '../../resources/database/hives.json';
 
 const UsMain = () => {
   const selfCareCategoryList = SelfCareCategoryList;
@@ -52,7 +52,7 @@ const TopBlock = styled.div`
   width: 90%;
   max-width: 800px;
   max-height: 300px;
-  margin: 0 auto;
+  margin: 10px auto;
   background-color: lightyellow;
 `;
 const TopTextArea = styled.div`

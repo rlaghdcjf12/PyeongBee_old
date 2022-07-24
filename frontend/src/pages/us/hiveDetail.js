@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
-import hives from '../../temp/database/hives.json';
+import hives from '../../resources/database/hives.json';
 import DetailBlock from '../../components/blocks/detailBlock/DetailBlock.js';
 import Carousel from '../../components/common/Carousel.js';
 import Hexagon from '../../components/common/Hexagon.js';
-import { HappyCategoryList, SelfCareCategoryList } from '../../temp/database/categories.js';
+import {
+  HappyCategoryList,
+  SelfCareCategoryList,
+} from '../../resources/database/categories.js';
 import { Alert, Col, Row } from 'react-bootstrap';
 import { MdStar } from 'react-icons/md';
 import TitleArea from '../../components/common/TitleArea.js';
