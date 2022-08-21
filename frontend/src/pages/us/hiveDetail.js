@@ -4,10 +4,7 @@ import hives from '../../resources/database/hives.json';
 import DetailBlock from '../../components/blocks/detailBlock/DetailBlock.js';
 import Carousel from '../../components/common/Carousel.js';
 import Hexagon from '../../components/common/Hexagon.js';
-import {
-  HappyCategoryList,
-  SelfCareCategoryList,
-} from '../../resources/database/categories.js';
+import { HappyCategoryList, SelfCareCategoryList } from '../../resources/database/categories.js';
 import { Alert, Col, Row } from 'react-bootstrap';
 import { MdStar } from 'react-icons/md';
 import TitleArea from '../../components/common/TitleArea.js';
@@ -35,7 +32,13 @@ const HiveDetail = () => {
           <TextArea>{hive.title}</TextArea>
         </CategoryArea>
         <Row style={{ marginBottom: '4vmin' }}>
-          <Col style={{ textAlign: 'center', fontSize: 'calc(12px + 1vmin)', borderRight: '1px solid gold' }}>
+          <Col
+            style={{
+              textAlign: 'center',
+              fontSize: 'calc(12px + 1vmin)',
+              borderRight: '1px solid gold',
+            }}
+          >
             <Row style={{ marginBottom: '10px' }}>
               <Col>
                 <MdStar /> 4.5
@@ -45,7 +48,13 @@ const HiveDetail = () => {
               <Col style={{ fontSize: 'calc(10px + 1vmin)' }}>최근 3달</Col>
             </Row>
           </Col>
-          <Col style={{ textAlign: 'center', fontSize: 'calc(12px + 1vmin)', borderRight: '1px solid gold' }}>
+          <Col
+            style={{
+              textAlign: 'center',
+              fontSize: 'calc(12px + 1vmin)',
+              borderRight: '1px solid gold',
+            }}
+          >
             <Row style={{ marginBottom: '10px' }}>
               <Col>4주</Col>
             </Row>
@@ -53,7 +62,13 @@ const HiveDetail = () => {
               <Col>20번</Col>
             </Row>
           </Col>
-          <Col style={{ textAlign: 'center', fontSize: 'calc(12px + 1vmin)', borderRight: '1px solid gold' }}>
+          <Col
+            style={{
+              textAlign: 'center',
+              fontSize: 'calc(12px + 1vmin)',
+              borderRight: '1px solid gold',
+            }}
+          >
             <Row style={{ marginBottom: '10px' }}>
               <Col>등급</Col>
             </Row>

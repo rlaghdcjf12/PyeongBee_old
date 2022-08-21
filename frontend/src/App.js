@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
@@ -12,6 +12,7 @@ import HiveDetail from './pages/us/hiveDetail';
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const serviceList = [
     {
@@ -31,12 +32,7 @@ function App() {
       title: 'YOU',
       baseUrl: '/you',
       url: '/you',
-      footerMenu: [
-        { title: '마니또' },
-        { title: 'M2' },
-        { title: 'M3' },
-        { title: '친구' },
-      ],
+      footerMenu: [{ title: '마니또' }, { title: 'M2' }, { title: 'M3' }, { title: '친구' }],
     },
     {
       id: 3,
@@ -53,16 +49,18 @@ function App() {
   ];
 
   let initialService;
-  const currentPath = useLocation().pathname;
-  if (currentPath.includes(serviceList[2].baseUrl)) {
-    initialService = serviceList[2];
-  } else if (currentPath.includes(serviceList[1].baseUrl)) {
-    initialService = serviceList[1];
-  } else if (currentPath.includes(serviceList[0].baseUrl)) {
-    initialService = serviceList[0];
-  } else {
-    initialService = serviceList[0];
-  }
+  let currentPath = location.pathname;
+  useEffect(() => {
+    if (currentPath.includes(serviceList[2].baseUrl)) {
+      initialService = serviceList[2];
+    } else if (currentPath.includes(serviceList[1].baseUrl)) {
+      initialService = serviceList[1];
+    } else if (currentPath.includes(serviceList[0].baseUrl)) {
+      initialService = serviceList[0];
+    } else {
+      initialService = serviceList[0];
+    }
+  });
   const [currentService, setCurrentService] = useState(initialService);
 
   const changeService = (service) => {
@@ -81,35 +79,46 @@ function App() {
     }
   };
 
+  const [locationKeys, setLocationKeys] = useState([]);
+
+  useEffect(() => {
+    currentPath = location.pathname;
+    // 뒷정리 함수 이용
+    console.log('location : ', location);
+    console.log('navigate : ', navigate);
+    // if (navigate.action === 'PUSH') {
+    //   setLocationKeys([location.key]);
+    // }
+    // if (navigate.action === 'POP') {
+    //   if (locationKeys[1] === location.key) {
+    //     setLocationKeys(([_, ...keys]) => keys);
+    //     // 앞으로 가기
+    //   } else {
+    //     setLocationKeys((keys) => [location.key, ...keys]);
+    //     // 뒤로 가기
+    //     navigate.push('/detail');
+    //   }
+    // }
+    // return true;
+  }, [locationKeys, location]);
+
   return (
     <AppBase>
-      <Header
-        serviceList={serviceList}
-        currentService={currentService}
-        changeService={changeService}
-      />
+      <Header serviceList={serviceList} currentService={currentService} changeService={changeService} />
       <Body>
         <Routes>
           <Route path='/' element={<MeMain />}></Route>
           <Route path={serviceList[0].url} element={<MeMain />}></Route>
           <Route path={serviceList[1].url} element={<YouMain />}></Route>
           <Route path={serviceList[2].url} element={<UsMain />}></Route>
-          <Route
-            path={serviceList[2].url + '/detail/:id'}
-            element={<HiveDetail />}
-          ></Route>
+          <Route path={serviceList[2].url + '/detail/:id'} element={<HiveDetail />}></Route>
         </Routes>
       </Body>
       <img src={logo} className='App-logo' alt='logo' />
       <p>
         Edit <code>src/App.js</code> and save to reload.
       </p>
-      <a
-        className='App-link'
-        href='https://reactjs.org'
-        target='_blank'
-        rel='noopener noreferrer'
-      >
+      <a className='App-link' href='https://reactjs.org' target='_blank' rel='noopener noreferrer'>
         Learn React !
       </a>
       <Footer currentService={currentService} />

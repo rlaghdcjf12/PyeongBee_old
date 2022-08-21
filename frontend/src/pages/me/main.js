@@ -1,34 +1,44 @@
+import { useEffect, useState, useRef } from 'react';
+import { useWindowScroll } from 'react-use';
 import { Alert, Card } from 'react-bootstrap';
 import Image from 'react-bootstrap/esm/Image.js';
 import styled from 'styled-components';
 import Hexagon from 'components/common/Hexagon.js';
 import { getUser } from 'resources/database/users.js';
+import { throttle } from 'lodash';
 
 const MeMain = () => {
+  const scrollInfo = useWindowScroll();
+  const [lastScrollY, setLastScrollY] = useState(0);
+  // const [headerHide, setHeaderHide] = useState(false);
   const user = getUser(1);
+
+  const handleScroll = (lastY, scroll) => {
+    if (lastY < scroll.y && scroll.y > 52) {
+      // header hide
+    } else if (lastY > scroll.y) {
+      // header down
+    }
+    setLastScrollY(scroll.y);
+  };
+
+  const throttled = useRef(throttle((lastY, scroll) => handleScroll(lastY, scroll), 100));
+
+  useEffect(() => {
+    throttled.current(lastScrollY, scrollInfo);
+  }, [scrollInfo, lastScrollY]);
 
   return (
     <>
       <Profile>
         <Background>
-          <Image
-            width={'100%'}
-            height={'100%'}
-            src='https://post-phinf.pstatic.net/MjAxOTA2MDNfMTQ3/MDAxNTU5NTI5MTkxNTI1.rxCH-JM27rrnvatW0sGIC9GnEArQzCIDXBA9QGyTSNYg.oGXpWK7prD3Jq9VyI1Ta9h7wZ2fUGIvMx8hC5q2_oZ8g.JPEG/Summer_beach.jpg?type=w1200'
-            alt='background_image'
-          ></Image>
+          <Image width={'100%'} height={'100%'} src={user?.backgroundImage} alt='background_image'></Image>
           <MyDreamContainer>
             <MyDream variant='warning'>평범함이 모여 비범함이 된다.</MyDream>
           </MyDreamContainer>
         </Background>
         <HexagonContainer>
-          <Hexagon
-            image='https://st.depositphotos.com/2069237/2950/i/950/depositphotos_29500311-stock-photo-running-man-male-runner-in.jpg'
-            width={30}
-            height={30}
-            unit='vw'
-            border='1px gold'
-          ></Hexagon>
+          <Hexagon image={user?.profileImage} width={30} height={30} unit='vw' border='1px gold'></Hexagon>
         </HexagonContainer>
         <NameContainer>
           <Title>Lv.{user?.lv}</Title>&nbsp;
@@ -64,13 +74,7 @@ const MeMain = () => {
                         />
                       </Honey>
                     ))}
-                    <HoneyDay>
-                      {5 * (wi + 1) === 100
-                        ? '☆'
-                        : (wi + 1) % 2 === 0
-                        ? 5 * (wi + 1)
-                        : ''}
-                    </HoneyDay>
+                    <HoneyDay>{5 * (wi + 1) === 100 ? '☆' : (wi + 1) % 2 === 0 ? 5 * (wi + 1) : ''}</HoneyDay>
                   </HoneyCol>
                 ))}
               </HoneyBody>
