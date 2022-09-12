@@ -1,125 +1,109 @@
 import { useEffect, useState, useRef } from 'react';
 import { useWindowScroll } from 'react-use';
-import { Alert, Card } from 'react-bootstrap';
+import { Alert, Badge, Card, Container, Row, Tab, Tabs } from 'react-bootstrap';
 import Image from 'react-bootstrap/esm/Image.js';
 import styled from 'styled-components';
 import Hexagon from 'components/common/Hexagon.js';
 import { getUser } from 'resources/database/users.js';
 import { throttle } from 'lodash';
+import BodyContainer from 'components/common/BodyContainer';
 
 const MeMain = () => {
-  const scrollInfo = useWindowScroll();
-  const [lastScrollY, setLastScrollY] = useState(0);
-  // const [headerHide, setHeaderHide] = useState(false);
   const user = getUser(1);
-
-  const handleScroll = (lastY, scroll) => {
-    if (lastY < scroll.y && scroll.y > 52) {
-      // header hide
-    } else if (lastY > scroll.y) {
-      // header down
-    }
-    setLastScrollY(scroll.y);
+  const [tab, setTab] = useState('retro');
+  const setCurreuntTab = (tab) => {
+    console.log(tab);
+    setTab(tab);
   };
-
-  const throttled = useRef(throttle((lastY, scroll) => handleScroll(lastY, scroll), 100));
-
-  useEffect(() => {
-    throttled.current(lastScrollY, scrollInfo);
-  }, [scrollInfo, lastScrollY]);
 
   return (
     <>
-      <Profile>
-        <Background>
-          <Image width={'100%'} height={'100%'} src={user?.backgroundImage} alt='background_image'></Image>
-          <MyDreamContainer>
-            <MyDream variant='warning'>평범함이 모여 비범함이 된다.</MyDream>
-          </MyDreamContainer>
-        </Background>
-        <HexagonContainer>
-          <Hexagon image={user?.profileImage} width={30} height={30} unit='vw' border='1px gold'></Hexagon>
-        </HexagonContainer>
-        <NameContainer>
-          <Title>Lv.{user?.lv}</Title>&nbsp;
-          <Title>{user?.title}</Title>&nbsp;
-          <NickName>{user?.name}</NickName>
-        </NameContainer>
-      </Profile>
-      <BodyContainer>
-        <RetroBlock>
-          <MessageCloud>오늘의 회고 하기</MessageCloud>
-          <HoneyContainer>
-            <HoneyWrapper>
-              <HoneyTitle>나의 꿀통</HoneyTitle>
-              <HoneyBody>
-                {user?.activityList?.map((week, wi) => (
-                  <HoneyCol key={wi} index={wi}>
-                    {week.map((day, di) => (
-                      <Honey key={di}>
-                        <Hexagon
-                          width={3.6}
-                          height={3.2}
-                          unit='vmin'
-                          border='1px Beige'
-                          color={
-                            day?.count >= 5
-                              ? '#EBB601'
-                              : day?.count >= 3
-                              ? 'Gold'
-                              : day?.count >= 1
-                              ? '#FFEE7B'
-                              : 'white'
-                          }
-                        />
-                      </Honey>
-                    ))}
-                    <HoneyDay>{5 * (wi + 1) === 100 ? '☆' : (wi + 1) % 2 === 0 ? 5 * (wi + 1) : ''}</HoneyDay>
-                  </HoneyCol>
-                ))}
-              </HoneyBody>
-            </HoneyWrapper>
-          </HoneyContainer>
-        </RetroBlock>
-        <div>ME 서비스의 메인 페이지 입니다.</div>
+      <BodyContainer width={90} maxWidth={800}>
+        <FlexBlock>
+          <HexagonWrapper>
+            <Hexagon image={user?.profileImage} width={24} height={24} unit='vw' border='1px gold'></Hexagon>
+          </HexagonWrapper>
+          <ProfileWrapper>
+            <ProfileRow>
+              {user?.title} {user?.name}
+            </ProfileRow>
+            <ProfileRow>Lv. {user?.lv} </ProfileRow>
+            <ProfileRow>평범함이 모여 비범함이 된다.</ProfileRow>
+          </ProfileWrapper>
+        </FlexBlock>
+        <FlexBlock>
+          <EmotionBox pill bg='warning' text='dark'>
+            🤗 행복
+          </EmotionBox>
+          <EmotionBox pill bg='warning' text='dark'>
+            😎 뿌듯
+          </EmotionBox>
+          <EmotionBox pill bg='warning' text='dark'>
+            🤬 분노
+          </EmotionBox>
+        </FlexBlock>
+        <HoneyContainer>
+          <HoneyWrapper>
+            <HoneyTitle>나의 꿀통</HoneyTitle>
+            <HoneyBody>
+              {user?.activityList?.map((week, wi) => (
+                <HoneyCol key={wi} index={wi}>
+                  {week.map((day, di) => (
+                    <Honey key={di}>
+                      <Hexagon
+                        width={3.6}
+                        height={3.2}
+                        unit='vmin'
+                        border='1px Beige'
+                        color={
+                          day?.count >= 5 ? '#EBB601' : day?.count >= 3 ? 'Gold' : day?.count >= 1 ? '#FFEE7B' : 'white'
+                        }
+                      />
+                    </Honey>
+                  ))}
+                  <HoneyDay>{5 * (wi + 1) === 100 ? '☆' : (wi + 1) % 2 === 0 ? 5 * (wi + 1) : ''}</HoneyDay>
+                </HoneyCol>
+              ))}
+            </HoneyBody>
+          </HoneyWrapper>
+        </HoneyContainer>
+        <Tabs fill activeKey={tab} onSelect={(tab) => setCurreuntTab(tab)}>
+          <Tab eventKey='retro' title='회고' />
+          <Tab eventKey='dailyLog' title='일지' />
+        </Tabs>
+        {tab === 'retro' ? <div>회고 입니다.</div> : <div>일지 입니다.</div>}
       </BodyContainer>
     </>
   );
 };
 
 // styles
-const Profile = styled.div``;
-const Background = styled.div`
-  width: 100vw;
-  max-width: 1200px;
-  height: 50vmin;
-  max-height: 400px;
-  margin: 0 auto;
+const FlexBlock = styled.div`
+  display: flex;
 `;
-const MyDreamContainer = styled.div`
-  position: absolute;
-  top: min(160px, 20vmin);
-  width: min(100vw, 1200px);
-  font-size: 4vmin;
+const HexagonWrapper = styled.div`
+  margin-right: 10px;
 `;
-const HexagonContainer = styled.div`
-  position: absolute;
-  top: calc(min(400px, 50vmin) - min(15vw, 90px));
-  left: calc(50vw - min(15vw, 90px));
+const ProfileWrapper = styled(Container)`
+  text-align: left;
+  align-items: center;
+  pa
 `;
-const MyDream = styled.div`
-  width: 100%;
-  height: 6vh;
-  color: white;
+const MyDreamRow = styled(Row)`
+  align-items: center;
+  font-size: min(4vw, 30px);
 `;
-const NameContainer = styled.div`
-  margin-top: calc(min(15vw, 90px) + 10px);
-  display: inline-flex;
-  font-size: calc(10px + 1.5vmin);
+const ProfileRow = styled(Row)`
+  align-items: center;
+  font-size: min(3.5vw, 25px);
+`;
+const EmotionBox = styled(Badge)`
+  margin: 10px auto;
+  font-size: min(4vw, 30px);
 `;
 const Title = styled.div``;
 const NickName = styled.div``;
-const BodyContainer = styled.div`
+const MainContainer = styled.div`
   margin-top: 2vh;
 `;
 const RetroBlock = styled.div``;
@@ -131,7 +115,7 @@ const MessageCloud = styled(Alert)`
   /* line-height: max(20px, 3vmin); */
 `;
 const HoneyContainer = styled(Card)`
-  width: 90vmin;
+  width: min(90vw, 800px);
   margin: 10px auto;
   overflow: hidden;
 `;
