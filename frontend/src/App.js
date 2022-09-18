@@ -23,7 +23,7 @@ function App() {
       footerMenu: [
         { title: '자아' },
         // { title: "꿈" },
-        // { title: "추억" },
+        { title: '추억' },
         // { title: "분석" },
       ],
     },
@@ -48,17 +48,13 @@ function App() {
     },
   ];
 
-  let initialService;
+  let initialService = serviceList[0];
   let currentPath = location.pathname;
   useEffect(() => {
     if (currentPath.includes(serviceList[2].baseUrl)) {
       initialService = serviceList[2];
     } else if (currentPath.includes(serviceList[1].baseUrl)) {
       initialService = serviceList[1];
-    } else if (currentPath.includes(serviceList[0].baseUrl)) {
-      initialService = serviceList[0];
-    } else {
-      initialService = serviceList[0];
     }
   });
   const [currentService, setCurrentService] = useState(initialService);

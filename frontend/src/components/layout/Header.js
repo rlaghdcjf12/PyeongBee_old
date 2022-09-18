@@ -14,27 +14,21 @@ import {
   Menu,
   MenuItem,
   Button,
+  Popover,
 } from '@mui/material';
+
 import { MdMenu } from 'react-icons/md';
-import FlexBox from 'components/common/FlexBox';
 
 const Header = (props) => {
+  const { serviceList, currentService, changeService } = props;
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleCloseMenu = (id) => {
+    if (id === null) setAnchorElNav(null);
+    else {
+      changeService(serviceList[id - 1]);
+      setAnchorElNav(null);
+    }
   };
 
   const HideOnScroll = ({ children, window }) => {
@@ -50,92 +44,89 @@ const Header = (props) => {
   };
 
   const SmallAppBar = () => (
-    <Toolbar variant='dense' disableGutters sx={{ display: { xs: 'flex', md: 'none' } }}>
+    <StyledToolbar variant='dense' disableGutters sx={{ display: { xs: 'flex', sm: 'none' } }}>
       <ImageWrapper>
         <img alt='logo' src='/images/logo_Bee_lsh_white.png' width='40' height='40' />
       </ImageWrapper>
-      <Typography variant='h6' component='div'>
-        PyeongBee
-      </Typography>
-      <Box>
-        <IconButton
-          size='middle'
-          aria-label='account of current user'
-          aria-controls='menu-appbar'
-          aria-haspopup='true'
-          onClick={handleOpenNavMenu}
-          color='inherit'
-        >
+      <Typography variant='h5'>PyeongBee</Typography>&nbsp;
+      <Typography variant='h5'>{currentService.title}</Typography>
+      <Box sx={{ marginLeft: 'auto' }}>
+        <IconButton size='middle' onClick={(e) => setAnchorElNav(e.currentTarget)} color='inherit'>
           <MdMenu />
         </IconButton>
         <Menu
-          id='menu-appbar'
-          anchorEl={anchorElNav}
           anchorOrigin={{
-            vertical: 'bottom',
+            vertical: 'top',
             horizontal: 'right',
           }}
+          id='menu-opened'
           keepMounted
           transformOrigin={{
             vertical: 'top',
             horizontal: 'right',
           }}
           open={Boolean(anchorElNav)}
-          onClose={handleCloseNavMenu}
-          sx={{
-            display: { xs: 'block', md: 'none' },
-          }}
+          onClose={() => handleCloseMenu(null)}
         >
-          <MenuItem key={1} onClick={handleCloseNavMenu}>
-            <Typography textAlign='center'>Me</Typography>
-          </MenuItem>
-          <MenuItem key={1} onClick={handleCloseNavMenu}>
-            <Typography textAlign='center'>Us</Typography>
-          </MenuItem>
+          {serviceList.map((service) => (
+            <MenuItem key={service.id} onClick={() => handleCloseMenu(service.id)}>
+              {service.title}
+            </MenuItem>
+          ))}
         </Menu>
       </Box>
-    </Toolbar>
+    </StyledToolbar>
   );
 
   const NormalAppBar = () => (
-    <Toolbar variant='dense' disableGutters sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+    <StyledToolbar variant='dense' disableGutters sx={{ display: { xs: 'none', sm: 'flex' } }}>
       <ImageWrapper>
         <img alt='logo' src='/images/logo_Bee_lsh_white.png' width='40' height='40' />
       </ImageWrapper>
-      <Typography variant='h6' component='div'>
+      <Typography variant='h5' marginRight='30px'>
         PyeongBee
       </Typography>
-      <Box>
-        <Button key={1} onClick={handleCloseNavMenu}>
-          <Typography textAlign='center'>Me</Typography>
-        </Button>
-        <Button key={2} onClick={handleCloseNavMenu}>
-          <Typography textAlign='center'>Us</Typography>
-        </Button>
-      </Box>
-    </Toolbar>
+      {serviceList.map((service) =>
+        service.id === currentService.id ? (
+          <Typography key={service.id} variant='h5' marginRight='10px' onClick={() => handleCloseMenu(service.id)}>
+            {service.title}&nbsp;
+          </Typography>
+        ) : (
+          <Typography
+            key={service.id}
+            variant='h6'
+            marginRight='20px'
+            color='gray'
+            onClick={() => handleCloseMenu(service.id)}
+          >
+            {service.title}&nbsp;
+          </Typography>
+        )
+      )}
+    </StyledToolbar>
   );
 
   return (
-    <>
-      <HideOnScroll {...props}>
-        <AppBar elevation={0}>
-          <HeaderContainer maxWidth='xl'>
+    <HideOnScroll {...props}>
+      <>
+        <EmptyArea />
+        <HeaderContainer elevation={0} color='inherit'>
+          <Container maxWidth='xl'>
             <SmallAppBar />
             <NormalAppBar />
-          </HeaderContainer>
-        </AppBar>
-      </HideOnScroll>
-      <Toolbar />
-    </>
+          </Container>
+        </HeaderContainer>
+      </>
+    </HideOnScroll>
   );
 };
 
 // styles
-const HeaderContainer = styled(Container)`
-  background-color: white;
+const HeaderContainer = styled(AppBar)`
   border-bottom: solid 2px gold;
-  color: black;
+`;
+const StyledToolbar = styled(Toolbar)`
+  min-height: 50px;
 `;
 const ImageWrapper = styled.div`
   margin-right: 10px;
@@ -147,9 +138,8 @@ const ImageWrapper = styled.div`
 //   color: ${(props) => (props.active === 'true' ? 'black' : 'gray')};
 //   cursor: pointer;
 // `;
-// const EmptyArea = styled.div`
-//   display: ${(props) => (props.headerHide === 'true' ? 'none' : 'block')};
-//   height: 52px;
-// `;
+const EmptyArea = styled.div`
+  height: 50px;
+`;
 
 export default Header;
