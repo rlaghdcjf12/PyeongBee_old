@@ -1,35 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
-// import { Container, Image, Navbar, Nav } from 'react-bootstrap';
+import { useState } from 'react';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import styled from 'styled-components';
-import {
-  Slide,
-  AppBar,
-  CssBaseline,
-  Toolbar,
-  Typography,
-  Container,
-  Box,
-  IconButton,
-  Menu,
-  MenuItem,
-  Button,
-  Popover,
-} from '@mui/material';
-
+import { Slide, AppBar, Toolbar, Typography, Container, Box, IconButton, Menu, MenuItem } from '@mui/material';
 import { MdMenu } from 'react-icons/md';
+import Spacer from 'components/common/Spacer';
 
 const Header = (props) => {
   const { serviceList, currentService, changeService } = props;
   const [anchorElNav, setAnchorElNav] = useState(null);
-
-  const handleCloseMenu = (id) => {
-    if (id === null) setAnchorElNav(null);
-    else {
-      changeService(serviceList[id - 1]);
-      setAnchorElNav(null);
-    }
-  };
 
   const HideOnScroll = ({ children, window }) => {
     const trigger = useScrollTrigger({
@@ -43,12 +21,21 @@ const Header = (props) => {
     );
   };
 
-  const SmallAppBar = () => (
-    <StyledToolbar variant='dense' disableGutters sx={{ display: { xs: 'flex', sm: 'none' } }}>
+  const handleCloseMenu = (id) => {
+    if (id === null) setAnchorElNav(null);
+    else {
+      changeService(serviceList[id - 1]);
+      setAnchorElNav(null);
+    }
+  };
+
+  const SmallToolbar = () => (
+    <Toolbar variant='dense' disableGutters sx={{ display: { xs: 'flex', sm: 'none' } }}>
       <ImageWrapper>
         <img alt='logo' src='/images/logo_Bee_lsh_white.png' width='40' height='40' />
       </ImageWrapper>
-      <Typography variant='h5'>PyeongBee</Typography>&nbsp;
+      <Typography variant='h5'>PyeongBee</Typography>
+      <Spacer axis='horizontal' size={1.5} />
       <Typography variant='h5'>{currentService.title}</Typography>
       <Box sx={{ marginLeft: 'auto' }}>
         <IconButton size='middle' onClick={(e) => setAnchorElNav(e.currentTarget)} color='inherit'>
@@ -75,69 +62,59 @@ const Header = (props) => {
           ))}
         </Menu>
       </Box>
-    </StyledToolbar>
+    </Toolbar>
   );
 
-  const NormalAppBar = () => (
-    <StyledToolbar variant='dense' disableGutters sx={{ display: { xs: 'none', sm: 'flex' } }}>
+  const NormalToolbar = () => (
+    <Toolbar variant='dense' disableGutters sx={{ display: { xs: 'none', sm: 'flex' } }}>
       <ImageWrapper>
-        <img alt='logo' src='/images/logo_Bee_lsh_white.png' width='40' height='40' />
+        <img alt='logo' src='/images/logo_Bee_lsh_white.png' />
       </ImageWrapper>
-      <Typography variant='h5' marginRight='30px'>
-        PyeongBee
-      </Typography>
-      {serviceList.map((service) =>
-        service.id === currentService.id ? (
-          <Typography key={service.id} variant='h5' marginRight='10px' onClick={() => handleCloseMenu(service.id)}>
-            {service.title}&nbsp;
-          </Typography>
-        ) : (
+      <Typography variant='h5'>PyeongBee</Typography>
+      <Spacer axis='horizontal' size={4} />
+      {serviceList.map((service) => (
+        <>
           <Typography
             key={service.id}
-            variant='h6'
-            marginRight='20px'
-            color='gray'
-            onClick={() => handleCloseMenu(service.id)}
+            variant={service.id !== currentService.id ? 'h6' : 'h5'}
+            color={service.id !== currentService.id && 'gray'}
+            onClick={() => changeService(serviceList[service.id - 1])}
           >
-            {service.title}&nbsp;
+            {service.title}
           </Typography>
-        )
-      )}
-    </StyledToolbar>
+          <Spacer axis='horizontal' size={1.5} />
+        </>
+      ))}
+    </Toolbar>
   );
 
   return (
-    <HideOnScroll {...props}>
-      <>
-        <EmptyArea />
-        <HeaderContainer elevation={0} color='inherit'>
+    <>
+      <EmptyArea />
+      <HideOnScroll {...props}>
+        <StyledAppBar elevation={0} color='inherit'>
           <Container maxWidth='xl'>
-            <SmallAppBar />
-            <NormalAppBar />
+            <SmallToolbar />
+            <NormalToolbar />
           </Container>
-        </HeaderContainer>
-      </>
-    </HideOnScroll>
+        </StyledAppBar>
+      </HideOnScroll>
+    </>
   );
 };
 
 // styles
-const HeaderContainer = styled(AppBar)`
+const StyledAppBar = styled(AppBar)`
   border-bottom: solid 2px gold;
-`;
-const StyledToolbar = styled(Toolbar)`
-  min-height: 50px;
+  text-align: center;
 `;
 const ImageWrapper = styled.div`
   margin-right: 10px;
+  & img {
+    width: 40px;
+    height: 40px;
+  }
 `;
-// const Service = styled(Nav.Item)`
-//   margin: 0 10px;
-//   font-weight: ${(props) => (props.active === 'true' ? '600' : '0')};
-//   font-size: 22px;
-//   color: ${(props) => (props.active === 'true' ? 'black' : 'gray')};
-//   cursor: pointer;
-// `;
 const EmptyArea = styled.div`
   height: 50px;
 `;
