@@ -1,11 +1,22 @@
 import { useEffect, useState } from 'react';
-import useScrollTrigger from '@mui/material/useScrollTrigger';
-import styled from 'styled-components';
-import { Slide, AppBar, Toolbar, Typography, Container, Box, IconButton, Menu, MenuItem } from '@mui/material';
-import { MdMenu } from 'react-icons/md';
-import Spacer from 'components/common/Spacer';
 import { useLocation } from 'react-router-dom';
+import {
+  Slide,
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+  Box,
+  IconButton,
+  Menu,
+  MenuItem,
+  useScrollTrigger,
+} from '@mui/material';
+import { MdMenu } from 'react-icons/md';
+import styled from 'styled-components';
 import { serviceList } from 'resources/database/services';
+import Spacer from 'components/common/Spacer';
+import FlexBox from 'components/common/FlexBox';
 
 const Header = (props) => {
   const { currentService, changeService } = props;
@@ -73,18 +84,17 @@ const Header = (props) => {
       </ImageWrapper>
       <Typography variant='h5'>PyeongBee</Typography>
       <Spacer axis='horizontal' size={4} />
-      {serviceList.map((service) => (
-        <>
+      {serviceList?.map((service) => (
+        <FlexBox key={service?.id}>
           <StyledText
-            key={service.id}
             variant={service.id !== currentService?.id ? 'h6' : 'h5'}
-            isActive={service.id === currentService?.id && 'true'}
+            active={service.id === currentService?.id ? 'true' : 'false'}
             onClick={() => changeService(serviceList[service.id - 1])}
           >
             {service.title}
           </StyledText>
-          <Spacer key={'spacer' + service?.id} axis='horizontal' size={1.5} />
-        </>
+          <Spacer key={'spacer' + service?.id} axis='horizontal' size={4} />
+        </FlexBox>
       ))}
     </Toolbar>
   );
@@ -126,7 +136,7 @@ const ImageWrapper = styled.div`
   }
 `;
 const StyledText = styled(Typography)`
-  color: ${(props) => (props.isActive === 'true' ? 'black' : 'gray')};
+  color: ${(props) => (props.active === 'true' ? 'black' : 'gray')};
   &:hover {
     cursor: pointer;
   }

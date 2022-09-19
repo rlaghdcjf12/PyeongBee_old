@@ -1,51 +1,47 @@
 import styled from 'styled-components';
+import { AppBar, Grid, Slide, Toolbar, Typography, useScrollTrigger } from '@mui/material';
 
 const Footer = ({ currentService }) => {
+  const size = currentService?.footerMenu.length;
+
+  const HideOnScroll = ({ children, window }) => {
+    const trigger = useScrollTrigger({
+      target: window ? window() : undefined,
+    });
+
+    return (
+      <Slide appear={false} direction='up' in={!trigger}>
+        {children}
+      </Slide>
+    );
+  };
+
   return (
     <>
       <EmptyArea />
-      {currentService?.footerMenu.length > 1 && (
-        <FooterEl>
-          <nav className='container'>
-            <div className='row'>
-              <Btn className='col'>{currentService?.footerMenu[0].title}</Btn>
-              <Btn className='col'>{currentService?.footerMenu[1].title}</Btn>
-              {currentService?.footerMenu.length > 2 && (
-                <Btn className='col'>{currentService?.footerMenu[2].title}</Btn>
-              )}
-              {currentService?.footerMenu.length > 3 && (
-                <Btn className='col'>{currentService?.footerMenu[3].title}</Btn>
-              )}
-            </div>
-          </nav>
-        </FooterEl>
-      )}
+      <HideOnScroll>
+        <StyledAppBar elevation={0} color='inherit' sx={{ top: 'auto', bottom: 0 }}>
+          <Toolbar variant='dense'>
+            <Grid container spacing={2}>
+              {currentService?.footerMenu.map((menu, idx) => (
+                <Grid item key={idx} xs={12 / size}>
+                  <Typography>{menu.title}</Typography>
+                </Grid>
+              ))}
+            </Grid>
+          </Toolbar>
+        </StyledAppBar>
+      </HideOnScroll>
     </>
   );
 };
 
 // styles
-const FooterEl = styled.footer`
-  background-color: white;
-  border-top: solid 1px gold;
-  height: 6vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: saddlebrown;
-  font-size: calc(8px + 2vmin);
-
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-`;
-const Btn = styled.div`
-  cursor: pointer;
+const StyledAppBar = styled(AppBar)`
+  border-top: solid 2px gold;
 `;
 const EmptyArea = styled.div`
-  height: 7vh;
+  height: 50px;
 `;
 
 export default Footer;

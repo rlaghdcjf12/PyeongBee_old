@@ -87,7 +87,6 @@ const HexagonWrapper = styled.div`
 const ProfileWrapper = styled(Container)`
   text-align: left;
   align-items: center;
-  pa
 `;
 const MyDreamRow = styled(Row)`
   align-items: center;
