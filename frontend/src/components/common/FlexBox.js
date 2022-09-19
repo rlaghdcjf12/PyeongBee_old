@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { Box } from '@mui/material';
 
-const FlexBox = ({ children }) => {
-  return <Container>{children}</Container>;
+const FlexBox = ({ children, ...props }) => {
+  return <Container {...props}>{children}</Container>;
 };
 
 // styles

@@ -46,9 +46,11 @@ const Header = (props) => {
       <ImageWrapper>
         <img alt='logo' src='/images/logo_Bee_lsh_white.png' />
       </ImageWrapper>
-      <Typography variant='h5'>PyeongBee</Typography>
-      <Spacer axis='horizontal' size={1.5} />
-      <Typography variant='h5'>{currentService?.title}</Typography>
+      <TextWrapper>
+        <Typography variant='h6'>PyeongBee</Typography>
+        <Spacer axis='horizontal' size={1.5} />
+        <Typography variant='h6'>{currentService?.title}</Typography>
+      </TextWrapper>
       <Box sx={{ marginLeft: 'auto' }}>
         <IconButton size='middle' onClick={(e) => setAnchorElNav(e.currentTarget)} color='inherit'>
           <MdMenu />
@@ -82,20 +84,22 @@ const Header = (props) => {
       <ImageWrapper>
         <img alt='logo' src='/images/logo_Bee_lsh_white.png' />
       </ImageWrapper>
-      <Typography variant='h5'>PyeongBee</Typography>
-      <Spacer axis='horizontal' size={4} />
-      {serviceList?.map((service) => (
-        <FlexBox key={service?.id}>
-          <StyledText
-            variant={service.id !== currentService?.id ? 'h6' : 'h5'}
-            active={service.id === currentService?.id ? 'true' : 'false'}
-            onClick={() => changeService(serviceList[service.id - 1])}
-          >
-            {service.title}
-          </StyledText>
-          <Spacer key={'spacer' + service?.id} axis='horizontal' size={4} />
-        </FlexBox>
-      ))}
+      <TextWrapper>
+        <Typography variant='h5'>PyeongBee</Typography>
+        <Spacer axis='horizontal' size={4} />
+        {serviceList?.map((service) => (
+          <FlexBox key={service?.id}>
+            <StyledText
+              variant={service.id !== currentService?.id ? 'h6' : 'h5'}
+              active={service.id === currentService?.id ? 'true' : 'false'}
+              onClick={() => changeService(serviceList[service.id - 1])}
+            >
+              {service.title}
+            </StyledText>
+            <Spacer key={'spacer' + service?.id} axis='horizontal' size={4} />
+          </FlexBox>
+        ))}
+      </TextWrapper>
     </Toolbar>
   );
 
@@ -127,6 +131,9 @@ const Header = (props) => {
 // styles
 const StyledAppBar = styled(AppBar)`
   border-bottom: solid 2px gold;
+`;
+const TextWrapper = styled(FlexBox)`
+  padding-top: 5px;
 `;
 const ImageWrapper = styled.div`
   margin-right: 10px;
