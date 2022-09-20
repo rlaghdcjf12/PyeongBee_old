@@ -7,98 +7,100 @@ import Hexagon from 'components/common/Hexagon.js';
 import { getUser } from 'resources/database/users.js';
 import { throttle } from 'lodash';
 import BodyContainer from 'components/common/BodyContainer';
+import { Box, Chip, Divider, Grid, Typography } from '@mui/material';
+import FlexBox from 'components/common/FlexBox';
 
 const MeMain = () => {
   const user = getUser(1);
-  const [tab, setTab] = useState('retro');
+  const [tab, setTab] = useState('RETRO');
+
   const setCurreuntTab = (tab) => {
     console.log(tab);
     setTab(tab);
   };
 
   return (
-    <>
-      <BodyContainer width={90} maxWidth={800}>
-        <FlexBlock>
-          <HexagonWrapper>
-            <Hexagon image={user?.profileImage} width={24} height={24} unit='vw' border='1px gold'></Hexagon>
-          </HexagonWrapper>
-          <ProfileWrapper>
-            <ProfileRow>
-              {user?.title} {user?.name}
-            </ProfileRow>
-            <ProfileRow>Lv. {user?.lv} </ProfileRow>
-            <ProfileRow>평범함이 모여 비범함이 된다.</ProfileRow>
-          </ProfileWrapper>
-        </FlexBlock>
-        <FlexBlock>
-          <EmotionBox pill bg='warning' text='dark'>
-            🤗 행복
-          </EmotionBox>
-          <EmotionBox pill bg='warning' text='dark'>
-            😎 뿌듯
-          </EmotionBox>
-          <EmotionBox pill bg='warning' text='dark'>
-            🤬 분노
-          </EmotionBox>
-        </FlexBlock>
-        <HoneyContainer>
-          <HoneyWrapper>
-            <HoneyTitle>나의 꿀통</HoneyTitle>
-            <HoneyBody>
-              {user?.activityList?.map((week, wi) => (
-                <HoneyCol key={wi} index={wi}>
-                  {week.map((day, di) => (
-                    <Honey key={di}>
-                      <Hexagon
-                        width={3.6}
-                        height={3.2}
-                        unit='vmin'
-                        border='1px Beige'
-                        color={
-                          day?.count >= 5 ? '#EBB601' : day?.count >= 3 ? 'Gold' : day?.count >= 1 ? '#FFEE7B' : 'white'
-                        }
-                      />
-                    </Honey>
-                  ))}
-                  <HoneyDay>{5 * (wi + 1) === 100 ? '☆' : (wi + 1) % 2 === 0 ? 5 * (wi + 1) : ''}</HoneyDay>
-                </HoneyCol>
-              ))}
-            </HoneyBody>
-          </HoneyWrapper>
-        </HoneyContainer>
-        <Tabs fill activeKey={tab} onSelect={(tab) => setCurreuntTab(tab)}>
-          <Tab eventKey='retro' title='회고' />
-          <Tab eventKey='dailyLog' title='일지' />
-        </Tabs>
-        {tab === 'retro' ? <div>회고 입니다.</div> : <div>일지 입니다.</div>}
-      </BodyContainer>
-    </>
+    <BodyContainer width={90} maxWidth={800}>
+      <FlexBox>
+        <HexagonWrapper>
+          <Hexagon image={user?.profileImage} width={24} height={24} unit='vw' border='2px gold'></Hexagon>
+        </HexagonWrapper>
+        <ProfileWrapper container direction='column' justifyContent='flex-start' alignItems='flex-start'>
+          <ProfileRow item>
+            {user?.title} {user?.name}
+          </ProfileRow>
+          <ProfileRow item>Lv. {user?.lv}</ProfileRow>
+          <ProfileRow item>평범함이 모여 비범함이 된다.</ProfileRow>
+        </ProfileWrapper>
+      </FlexBox>
+      <Grid container direction='column'>
+        <Grid item>오늘의 감정</Grid>
+        <Grid item>
+          <Grid container direction='row' justifyContent='space-evenly' alignItems='center'>
+            <Grid item>
+              <EmotionBox>🤗 행복</EmotionBox>
+            </Grid>
+            <Divider orientation='vertical' variant='middle' flexItem></Divider>
+            <Grid item>
+              <EmotionBox>😎 뿌듯</EmotionBox>
+            </Grid>
+            <Divider orientation='vertical' variant='middle' flexItem></Divider>
+            <Grid item>
+              <EmotionBox>🤬 분노</EmotionBox>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <HoneyContainer>
+        <HoneyWrapper>
+          <HoneyTitle>나의 꿀통</HoneyTitle>
+          <HoneyBody>
+            {user?.activityList?.map((week, wi) => (
+              <HoneyCol key={wi} index={wi}>
+                {week.map((day, di) => (
+                  <Honey key={di}>
+                    <Hexagon
+                      width={3.6}
+                      height={3.2}
+                      unit='vmin'
+                      border='1px Beige'
+                      color={
+                        day?.count >= 5 ? '#EBB601' : day?.count >= 3 ? 'Gold' : day?.count >= 1 ? '#FFEE7B' : 'white'
+                      }
+                    />
+                  </Honey>
+                ))}
+                <HoneyDay>{5 * (wi + 1) === 100 ? '☆' : (wi + 1) % 2 === 0 ? 5 * (wi + 1) : ''}</HoneyDay>
+              </HoneyCol>
+            ))}
+          </HoneyBody>
+        </HoneyWrapper>
+      </HoneyContainer>
+      <Tabs fill activeKey={tab} onSelect={(tab) => setCurreuntTab(tab)}>
+        <Tab eventKey='RETRO' title='회고' />
+        <Tab eventKey='DAILY' title='일지' />
+      </Tabs>
+      {tab === 'RETRO' ? <div>회고 입니다.</div> : <div>일지 입니다.</div>}
+    </BodyContainer>
   );
 };
 
 // styles
-const FlexBlock = styled.div`
-  display: flex;
-`;
-const HexagonWrapper = styled.div`
+const HexagonWrapper = styled(Box)`
   margin-right: 10px;
 `;
-const ProfileWrapper = styled(Container)`
-  text-align: left;
-  align-items: center;
-`;
-const MyDreamRow = styled(Row)`
-  align-items: center;
-  font-size: min(4vw, 30px);
-`;
-const ProfileRow = styled(Row)`
+const ProfileWrapper = styled(Grid)``;
+const ProfileRow = styled(Grid)`
   align-items: center;
   font-size: min(3.5vw, 25px);
 `;
-const EmotionBox = styled(Badge)`
+const EmotionBox = styled(Box)`
   margin: 10px auto;
   font-size: min(4vw, 30px);
+  border: '1px solid gold';
+  background-color: gold;
+  width: min(17.5vw, 125px);
+  border-radius: 16px;
 `;
 const Title = styled.div``;
 const NickName = styled.div``;
