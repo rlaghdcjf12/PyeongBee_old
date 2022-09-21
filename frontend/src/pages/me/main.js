@@ -1,22 +1,68 @@
-import { useEffect, useState, useRef } from 'react';
-import { useWindowScroll } from 'react-use';
-import { Alert, Badge, Card, Container, Row, Tab, Tabs } from 'react-bootstrap';
-import Image from 'react-bootstrap/esm/Image.js';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Hexagon from 'components/common/Hexagon.js';
 import { getUser } from 'resources/database/users.js';
-import { throttle } from 'lodash';
 import BodyContainer from 'components/common/BodyContainer';
-import { Box, Chip, Divider, Grid, Typography } from '@mui/material';
+import { Box, Grid, Paper, Tab, Tabs, TextField, Card, Alert } from '@mui/material';
 import FlexBox from 'components/common/FlexBox';
+import BlockWrapper from 'components/common/BlockWrapper';
+import Spacer from 'components/common/Spacer';
+import { MdArrowForward } from 'react-icons/md';
 
 const MeMain = () => {
   const user = getUser(1);
   const [tab, setTab] = useState('RETRO');
 
-  const setCurreuntTab = (tab) => {
+  const setCurreuntTab = (event, tab) => {
     console.log(tab);
     setTab(tab);
+  };
+
+  const RetroBlock = () => {
+    return (
+      <Paper elevation={0}>
+        <Spacer size={2} />
+        <BlockWrapper title='🌃 하루 정리'>
+          <TextField id='retro-daily' label='어디보자.. 오늘 무슨 일이 있었더라..' fullWidth multiline></TextField>
+        </BlockWrapper>
+        <Spacer size={2} />
+        <BlockWrapper title='🥰 오늘의 설렘과 행복'>
+          <TextField id='retro-happy' label='오늘 날씨가 좋아서 산책도 하고 좋았어!' fullWidth multiline></TextField>
+        </BlockWrapper>
+        <Spacer size={2} />
+        <BlockWrapper title='🎁 오늘의 감사일기'>
+          <TextField
+            id='retro-thanks'
+            label='출퇴근 할 때 지하철에 앉아서 갈 수 있어 감사합니다!'
+            fullWidth
+            multiline
+          ></TextField>
+        </BlockWrapper>
+        <Spacer size={2} />
+        <BlockWrapper title='❤️ 오늘의 감정일기'>
+          <TextField id='retro-emotion' label='오늘은 너무 행복해!' fullWidth multiline></TextField>
+        </BlockWrapper>
+        <Spacer size={2} />
+        <BlockWrapper title='😢 오늘의 잊고 싶은 순간'>
+          <TextField id='retro-sad' label='오늘 이건 좀 힘들더라..' fullWidth multiline></TextField>
+        </BlockWrapper>
+      </Paper>
+    );
+  };
+
+  const GrowBlock = () => {
+    return (
+      <Paper elevation={0}>
+        <Spacer size={2} />
+        <BlockWrapper title='📘 오늘의 독서'>
+          <TextField id='grow-book' label='자기관리론을 읽고..' fullWidth multiline></TextField>
+        </BlockWrapper>
+        <Spacer size={2} />
+        <BlockWrapper title='🔥 오늘의 성공 실천'>
+          <TextField id='grow-step' label='오늘은 영어 단어를 20개 외웠어!' fullWidth multiline></TextField>
+        </BlockWrapper>
+      </Paper>
+    );
   };
 
   return (
@@ -33,24 +79,39 @@ const MeMain = () => {
           <ProfileRow item>평범함이 모여 비범함이 된다.</ProfileRow>
         </ProfileWrapper>
       </FlexBox>
-      <Grid container direction='column'>
-        <Grid item>오늘의 감정</Grid>
-        <Grid item>
+      <Spacer axis='vertical' size={1} />
+      <BlockWrapper title='오늘의 감정'>
+        <Grid container direction='column'>
+          <Grid container direction='row' justifyContent='space-around' alignItems='center'>
+            <Grid xs={4} item>
+              <TextWrapper>아침</TextWrapper>
+            </Grid>
+            <Grid xs={4} item>
+              <TextWrapper>저녁</TextWrapper>
+            </Grid>
+            <Grid xs={4} item>
+              <TextWrapper>밤</TextWrapper>
+            </Grid>
+          </Grid>
           <Grid container direction='row' justifyContent='space-evenly' alignItems='center'>
             <Grid item>
               <EmotionBox>🤗 행복</EmotionBox>
             </Grid>
-            <Divider orientation='vertical' variant='middle' flexItem></Divider>
+            <TextWrapper>
+              <MdArrowForward />
+            </TextWrapper>
             <Grid item>
               <EmotionBox>😎 뿌듯</EmotionBox>
             </Grid>
-            <Divider orientation='vertical' variant='middle' flexItem></Divider>
+            <TextWrapper>
+              <MdArrowForward />
+            </TextWrapper>
             <Grid item>
               <EmotionBox>🤬 분노</EmotionBox>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </BlockWrapper>
       <HoneyContainer>
         <HoneyWrapper>
           <HoneyTitle>나의 꿀통</HoneyTitle>
@@ -76,11 +137,11 @@ const MeMain = () => {
           </HoneyBody>
         </HoneyWrapper>
       </HoneyContainer>
-      <Tabs fill activeKey={tab} onSelect={(tab) => setCurreuntTab(tab)}>
-        <Tab eventKey='RETRO' title='회고' />
-        <Tab eventKey='DAILY' title='일지' />
-      </Tabs>
-      {tab === 'RETRO' ? <div>회고 입니다.</div> : <div>일지 입니다.</div>}
+      <StyledTabs value={tab} onChange={setCurreuntTab} variant='fullWidth'>
+        <StyledTab value='RETRO' label='✍️ 회고' />
+        <StyledTab value='DAILY' label='🚀 성장' />
+      </StyledTabs>
+      {tab === 'RETRO' ? <RetroBlock /> : <GrowBlock />}
     </BodyContainer>
   );
 };
@@ -94,20 +155,38 @@ const ProfileRow = styled(Grid)`
   align-items: center;
   font-size: min(3.5vw, 25px);
 `;
+const TextWrapper = styled.span`
+  font-size: calc(10px + 2vmin);
+`;
 const EmotionBox = styled(Box)`
-  margin: 10px auto;
-  font-size: min(4vw, 30px);
+  font-size: calc(10px + 2vmin);
   border: '1px solid gold';
   background-color: gold;
-  width: min(17.5vw, 125px);
+  width: calc(45px + 9vmin);
   border-radius: 16px;
 `;
-const Title = styled.div``;
-const NickName = styled.div``;
-const MainContainer = styled.div`
-  margin-top: 2vh;
+const StyledTabs = styled(Tabs)`
+  height: 8vmin;
+  min-height: 24px !important;
+  && .MuiTabs-indicator {
+    background-color: gold;
+  }
+  && button {
+    height: 8vmin;
+    min-height: 24px;
+    padding: 0;
+  }
+  && .Mui-selected {
+    color: saddlebrown;
+  }
 `;
-const RetroBlock = styled.div``;
+const StyledTab = styled(Tab)`
+  && {
+    color: black;
+    font-size: calc(8px + 2vmin);
+    text-transform: none;
+  }
+`;
 const MessageCloud = styled(Alert)`
   width: 90vmin;
   /* height: 10vh; */

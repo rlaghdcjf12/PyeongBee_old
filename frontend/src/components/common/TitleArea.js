@@ -11,9 +11,8 @@ const TitleArea = ({ title }) => {
 // styles
 const Container = styled.div`
   text-align: left;
-  width: 90%;
   max-width: 800px;
-  margin: 0 auto 10px;
+  margin: 0 auto min(1vmin, 10px);
 `;
 const Body = styled.strong`
   margin: 0 auto;
