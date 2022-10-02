@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Slide,
   AppBar,
@@ -21,6 +21,7 @@ import FlexBox from 'components/common/FlexBox';
 const Header = (props) => {
   const { currentService, changeService } = props;
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPath = location.pathname;
   const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -39,6 +40,22 @@ const Header = (props) => {
   const handleCloseMenu = (id) => {
     if (id != null) changeService(serviceList[id - 1]);
     setAnchorElNav(null);
+  };
+
+  const handleClickMenuItem = (service) => {
+    changeService(serviceList[service.id - 1]);
+    switch (service?.id) {
+      case 1:
+        navigate(serviceList[0].url);
+        break;
+      case 2:
+        navigate(serviceList[1].url);
+        break;
+      case 3:
+        navigate(serviceList[2].url);
+        break;
+      default:
+    }
   };
 
   const SmallToolbar = () => (
@@ -92,7 +109,7 @@ const Header = (props) => {
             <StyledText
               variant={service.id !== currentService?.id ? 'h6' : 'h5'}
               active={service.id === currentService?.id ? 'true' : 'false'}
-              onClick={() => changeService(serviceList[service.id - 1])}
+              onClick={() => handleClickMenuItem(service)}
             >
               {service.title}
             </StyledText>

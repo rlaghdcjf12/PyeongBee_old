@@ -112,7 +112,7 @@ const MeMain = () => {
           </Grid>
         </Grid>
       </BlockWrapper>
-      <HoneyContainer>
+      {/* <HoneyContainer>
         <HoneyWrapper>
           <HoneyTitle>나의 꿀통</HoneyTitle>
           <HoneyBody>
@@ -136,7 +136,7 @@ const MeMain = () => {
             ))}
           </HoneyBody>
         </HoneyWrapper>
-      </HoneyContainer>
+      </HoneyContainer> */}
       <StyledTabs value={tab} onChange={setCurreuntTab} variant='fullWidth'>
         <StyledTab value='RETRO' label='✍️ 회고' />
         <StyledTab value='DAILY' label='🚀 성장' />
@@ -187,45 +187,45 @@ const StyledTab = styled(Tab)`
     text-transform: none;
   }
 `;
-const MessageCloud = styled(Alert)`
-  width: 90vmin;
-  /* height: 10vh; */
-  margin: 10px auto;
-  font-size: max(20px, 3vmin);
-  /* line-height: max(20px, 3vmin); */
-`;
-const HoneyContainer = styled(Card)`
-  width: min(90vw, 800px);
-  margin: 10px auto;
-  overflow: hidden;
-`;
-const HoneyWrapper = styled(Card.Body)`
-  padding-right: 1vw;
-  padding-left: 1vw;
-  margin: 0 auto;
-  text-align: left;
-`;
-const HoneyTitle = styled(Card.Title)`
-  font-size: min(4vw, 28px);
-`;
-const HoneyBody = styled.div`
-  display: flex;
-  margin-bottom: 2vmin;
-  text-align: center;
-`;
-const HoneyCol = styled.div`
-  position: relative;
-  top: ${(props) => (props.index % 2 === 1 ? '2.5vmin' : '')};
-  /* display: ; */
-`;
-const Honey = styled.div`
-  width: 4vmin;
-  margin-bottom: 0.6vw;
-`;
-const HoneyDay = styled.span`
-  position: relative;
-  top: -4px;
-  font-size: min(2.5vw, 20px);
-`;
+// const MessageCloud = styled(Alert)`
+//   width: 90vmin;
+//   /* height: 10vh; */
+//   margin: 10px auto;
+//   font-size: max(20px, 3vmin);
+//   /* line-height: max(20px, 3vmin); */
+// `;
+// const HoneyContainer = styled(Card)`
+//   width: min(90vw, 800px);
+//   margin: 10px auto;
+//   overflow: hidden;
+// `;
+// const HoneyWrapper = styled(Card.Body)`
+//   padding-right: 1vw;
+//   padding-left: 1vw;
+//   margin: 0 auto;
+//   text-align: left;
+// `;
+// const HoneyTitle = styled(Card.Title)`
+//   font-size: min(4vw, 28px);
+// `;
+// const HoneyBody = styled.div`
+//   display: flex;
+//   margin-bottom: 2vmin;
+//   text-align: center;
+// `;
+// const HoneyCol = styled.div`
+//   position: relative;
+//   top: ${(props) => (props.index % 2 === 1 ? '2.5vmin' : '')};
+//   /* display: ; */
+// `;
+// const Honey = styled.div`
+//   width: 4vmin;
+//   margin-bottom: 0.6vw;
+// `;
+// const HoneyDay = styled.span`
+//   position: relative;
+//   top: -4px;
+//   font-size: min(2.5vw, 20px);
+// `;
 
 export default MeMain;
