@@ -4,6 +4,8 @@ import Hexagon from '../../common/Hexagon.js';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineLocationOn } from 'react-icons/md';
+import { getUser } from 'resources/database/users.js';
+import FlexBox from 'components/common/FlexBox.js';
 
 const ListItem = ({ item }) => {
   const navigate = useNavigate();
@@ -42,7 +44,22 @@ const ListItem = ({ item }) => {
               {item.location}
             </SimpleCol>
           </InfoTitle>
-          <InfoAir>
+          <InfoDescription>{item.description}</InfoDescription>
+          <InfoManager>
+            <FlexBox>
+              <ImageArea>
+                <Hexagon
+                  image={getUser(item.manager)?.profileImage}
+                  width={5}
+                  height={5}
+                  unit='vmin'
+                  border='1px gold'
+                />
+              </ImageArea>
+              <div>{getUser(item.manager)?.name}</div>
+            </FlexBox>
+          </InfoManager>
+          {/* <InfoAir>
             <Col xs={3} style={{ paddingRight: '0px' }}>
               분위기
             </Col>
@@ -59,7 +76,7 @@ const ListItem = ({ item }) => {
                 style={{ height: '3vmin', margin: '5px 0 5px' }}
               />
             </Col>
-          </InfoAir>
+          </InfoAir> */}
           <InfoCondition>
             <ConditionBadge pill bg='primary'>
               남다른 각오
@@ -77,9 +94,6 @@ const ListItem = ({ item }) => {
               {item.condition}번
             </ConditionBadge> */}
           </InfoCondition>
-          <InfoPersonnel>
-            <div className='itemTitle'>OOOOO 17명 / 25명</div>
-          </InfoPersonnel>
           <InfoPersonnel>
             <div className='itemTitle'>OOOOO 17명 / 25명</div>
           </InfoPersonnel>
@@ -128,7 +142,13 @@ const InfoCondition = styled.div``;
 const ConditionBadge = styled(Badge)`
   margin-right: 0.8vmin;
 `;
+const InfoDescription = styled.div`
+  /* margin-right: 0; */
+`;
 const InfoAir = styled(Row)`
+  margin-right: 0;
+`;
+const InfoManager = styled.div`
   margin-right: 0;
 `;
 const InfoPersonnel = styled(Row)`

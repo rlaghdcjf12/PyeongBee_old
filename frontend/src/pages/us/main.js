@@ -4,17 +4,15 @@ import CategoryBlock from '../../components/blocks/categoryBlock/CategoryBlock.j
 import ListBlock from '../../components/blocks/listBlock/ListBlock.js';
 import { SelfCareCategoryList, HappyCategoryList } from '../../resources/database/categories.js';
 import HiveList from '../../resources/database/hives.json';
+import { Box } from '@mui/material';
 
 const UsMain = () => {
-  const selfCareCategoryList = SelfCareCategoryList;
-  const happyCategoryList = HappyCategoryList;
-
   return (
     <div>
       <TopBlock>
         <TopTextArea>
-          <strong>둥지</strong>
-          <p>다른 꿀벌들이 모여 있는 둥지들을 둘러보세요</p>
+          <strong>Bee House</strong>
+          <p>다른 꿀벌들이 모여 있는 공간들을 둘러보세요</p>
         </TopTextArea>
         <TopImageArea>
           <img
@@ -25,10 +23,10 @@ const UsMain = () => {
           />
         </TopImageArea>
       </TopBlock>
-      <CategoryBlock title='나를 가꾸는 둥지' categoryList={selfCareCategoryList} />
-      <CategoryBlock title='현재를 즐기는 둥지' categoryList={happyCategoryList} />
+      <CategoryBlock title='나를 가꾸는 둥지' categoryList={SelfCareCategoryList} />
+      <CategoryBlock title='현재를 즐기는 둥지' categoryList={HappyCategoryList} />
       {/* <div>필터</div> */}
-      <ListBlock title='모든 둥지' itemList={HiveList} />
+      <ListBlock title='모든 공간' itemList={HiveList} />
       {/* <ListBlock title='인기 하이브' />
       <ListBlock title='참여했던 하이브' />
       <ListBlock title='활기찬 하이브' />
@@ -38,7 +36,7 @@ const UsMain = () => {
 };
 
 // styles
-const TopBlock = styled.div`
+const TopBlock = styled(Box)`
   display: flex;
   width: 90%;
   max-width: 800px;
@@ -46,13 +44,13 @@ const TopBlock = styled.div`
   margin: 10px auto;
   background-color: lightyellow;
 `;
-const TopTextArea = styled.div`
+const TopTextArea = styled(Box)`
   width: 70%;
   text-align: left;
   font-size: calc(8px + 2vmin);
   background-color: white;
 `;
-const TopImageArea = styled.div`
+const TopImageArea = styled(Box)`
   width: 30%;
 `;
 export default UsMain;

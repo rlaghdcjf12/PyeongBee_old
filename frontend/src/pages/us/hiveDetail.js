@@ -8,6 +8,7 @@ import { HappyCategoryList, SelfCareCategoryList } from '../../resources/databas
 import { Alert, Col, Row } from 'react-bootstrap';
 import { MdStar } from 'react-icons/md';
 import TitleArea from '../../components/common/TitleArea.js';
+import { getUser } from 'resources/database/users.js';
 
 const HiveDetail = () => {
   const { id } = useParams();
@@ -25,9 +26,7 @@ const HiveDetail = () => {
       <IntroArea>
         <CategoryArea>
           <LogoArea>
-            <Hexagon image={category?.imagePath} width={6.5} height={6.5} unit='vmin' border={'1px gold'}>
-              {hive.title}
-            </Hexagon>
+            <Hexagon image={category?.imagePath} width={6.5} height={6.5} unit='vmin' border={'1px gold'} />
           </LogoArea>
           <TextArea>{hive.title}</TextArea>
         </CategoryArea>
@@ -40,13 +39,27 @@ const HiveDetail = () => {
             }}
           >
             <Row style={{ marginBottom: '10px' }}>
+              <Col>매니저</Col>
+            </Row>
+            <Row>
+              <Col style={{ fontSize: 'calc(10px + 1vmin)' }}>{getUser(hive.manager).name}</Col>
+            </Row>
+          </Col>
+          <Col
+            style={{
+              textAlign: 'center',
+              fontSize: 'calc(12px + 1vmin)',
+              borderRight: '1px solid gold',
+            }}
+          >
+            <Row style={{ marginBottom: '10px' }}>
+              <Col>인원</Col>
+            </Row>
+            <Row>
               <Col>
-                <MdStar /> 4.5
+                {hive.currentCount}/{hive.maxCount}명
               </Col>
             </Row>
-            <Row>
-              <Col style={{ fontSize: 'calc(10px + 1vmin)' }}>최근 3달</Col>
-            </Row>
           </Col>
           <Col
             style={{
@@ -56,32 +69,18 @@ const HiveDetail = () => {
             }}
           >
             <Row style={{ marginBottom: '10px' }}>
-              <Col>4주</Col>
+              <Col>보상</Col>
             </Row>
             <Row>
-              <Col>20번</Col>
-            </Row>
-          </Col>
-          <Col
-            style={{
-              textAlign: 'center',
-              fontSize: 'calc(12px + 1vmin)',
-              borderRight: '1px solid gold',
-            }}
-          >
-            <Row style={{ marginBottom: '10px' }}>
-              <Col>등급</Col>
-            </Row>
-            <Row>
-              <Col style={{ fontSize: 'calc(12px + 0.5vmin)' }}>남다른각오</Col>
+              <Col style={{ fontSize: 'calc(12px + 0.5vmin)' }}>O</Col>
             </Row>
           </Col>
           <Col style={{ textAlign: 'center', fontSize: 'calc(12px + 1vmin)' }}>
             <Row style={{ marginBottom: '10px' }}>
-              <Col>운영비</Col>
+              <Col>장소</Col>
             </Row>
             <Row>
-              <Col>3 밀랍</Col>
+              <Col>{hive.location}</Col>
             </Row>
           </Col>
         </Row>
@@ -94,6 +93,7 @@ const HiveDetail = () => {
             3. This is a alert—check it out!
           </Alert>
         </Row>
+        <Row>{hive.description}</Row>
         <Row>
           <TitleArea title='함께하는 챌린지'></TitleArea>
           <Row style={{ marginBottom: '10px', paddingLeft: '5%' }}>
