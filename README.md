@@ -1,1 +1,2 @@
-# PyeongBee
+# PyeongBee_old
+자기계발에 진심일 때 만드려고 했던 서비스이지만 뒷심이 부족했다.
